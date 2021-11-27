@@ -21,9 +21,10 @@ import javax.xml.stream.XMLStreamException;
 
 import App.App;
 import core.File;
+import logging.Critical;
 import logging.Info;
 
-public final class Window extends JFrame {
+public final class Window extends JFrame  {
 	
 	private File file;
 	
@@ -32,10 +33,17 @@ public final class Window extends JFrame {
 	
 	public Window(core.File file) {
 		super("Exjeel");
-		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		super.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel();
 
 		this.file = file;
+		
+		 this.addWindowListener(new WindowAdapter() {
+		      public void windowClosing(WindowEvent we) {
+		    	  App.chiudi();
+		      }
+	    });
+
 				
 		// toolbar
 		toolbar = new JToolBar(JToolBar.HORIZONTAL);
@@ -47,11 +55,21 @@ public final class Window extends JFrame {
 				choser.showOpenDialog(null);
 				java.io.File file = choser.getSelectedFile();
 				String filename = file.getPath();
-				App.finestra.caricaFile(filename);
+				App.carica(filename);
 			} 
 		});
 		JButton bSalva = new JButton("Salva");
+		bSalva.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				App.salva();
+			} 
+		});
 		JButton bChiudi = new JButton("Chiudi");
+		bChiudi.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				App.chiudi();
+			} 
+		});
 		toolbar.add(bApri);
 		toolbar.add(bSalva);
 		toolbar.add(bChiudi);
@@ -69,10 +87,9 @@ public final class Window extends JFrame {
 	}
 
 	protected void caricaFile(String filename) {
-		
-		new Info(filename);
-		
+		java.io.File file = new java.io.File(filename);
 	}
+	
 
 
 }

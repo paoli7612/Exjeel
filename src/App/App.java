@@ -40,8 +40,24 @@ public class App {
 			new Critical(e.toString());
 		}
 
+			
+	}
+
+	public static void chiudi() {
+		new Info("Chiudi");
+		new Warn("Stop app");		
 		Log.stop();
-		new Warn("Stop app");	
+		App.finestra.dispose();
+	}
+
+	public static void carica(String filename) {
+		new Info("Carica: " + filename);
+		
+	}
+
+	public static void salva() {
+		new Info("Salva");
+		
 	}
 
 }
