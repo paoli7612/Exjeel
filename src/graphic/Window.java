@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.DimensionUIResource;
 import javax.swing.table.TableCellEditor;
 import javax.xml.stream.XMLStreamException;
 
@@ -108,7 +109,7 @@ public final class Window extends JFrame  {
 		JTextField input = new JTextField(22);
 		header.add(input);
 		
-		// grill
+		// table
 		table = new JTable(25, 25);
 		
 		panel.add(header);
