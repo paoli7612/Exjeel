@@ -23,7 +23,9 @@ public class Log {
 		String str = base + " " + messaggio + " " + end + "\n";
 		
 		if (livello >= Log.livello) {
-			System.out.print(str);
+			if (Log.sysOut) {				
+				System.out.print(str);
+			}
 	
 			if (Log.file != null) {
 				try {
