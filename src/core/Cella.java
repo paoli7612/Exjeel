@@ -18,6 +18,11 @@ public class Cella {
 			return "   "; 
 		}
 	}
+
+	public void setValue(float f) {
+		this.value = f;
+		
+	}
 	
 	
 }

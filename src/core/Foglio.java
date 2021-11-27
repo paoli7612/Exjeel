@@ -56,4 +56,9 @@ public class Foglio {
 		
 		return str;
 	}
+
+	public void write(int x, int y, float f) {
+		this.celle.get(y).get(x).setValue(f);
+		
+	}
 }

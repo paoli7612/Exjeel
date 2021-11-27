@@ -22,7 +22,7 @@ public class App {
 		try {
 			Foglio f = new Foglio();
 			for (int i=0; i<5; i++) {				
-				f.celle.get(i+4).get(3).value = 4f*i/2;
+				f.write(i+4, 3, 4f*i/2);
 			}
 			f.print();			
 		} catch (Exception e) {
