@@ -3,17 +3,19 @@ import logging.*;
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
-		Log.livello = Log.Level.INFO;
-		Log.file = "log";
+		Log.livello = Log.INFO;
+		Log.setFile("log");
 		Log.sysOut = true;
 		
-		new Warn(">>> Start app <<<");
+		new Warn("Start app");
 		
 		Foglio f = new Foglio();
 
-		new Warn(">>> Stop app <<<");		
+		new Warn("Stop app");	
+		
+		Log.close();
 	}
 
 }
