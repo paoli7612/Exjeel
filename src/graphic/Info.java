@@ -1,10 +1,15 @@
 package graphic;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import App.App;
 
 public class Info extends JFrame {
 
@@ -28,6 +33,13 @@ public class Info extends JFrame {
 			
 		super.add(panel);
 		super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		 this.addWindowListener(new WindowAdapter() {
+		      public void windowClosing(WindowEvent we) {
+		    	  App.finestra.binfo.setEnabled(true);
+		      }
+	    });
+		
 		super.setVisible(true);
 		super.setResizable(false);
 		super.setBounds(400, 400, 450, 150);

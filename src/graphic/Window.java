@@ -2,6 +2,8 @@ package graphic;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +24,7 @@ import javax.xml.stream.XMLStreamException;
 import App.App;
 import core.File;
 import logging.Critical;
+import logging.Error;
 import logging.Info;
 import logging.Warn;
 
@@ -32,6 +35,8 @@ public final class Window extends JFrame  {
 	private JPanel header;
 	private JPanel toolbar;	
 	private JTable table;
+	
+	public JButton binfo;
 	
 	public Window(core.File file) {
 		super("Exjeel");
@@ -52,8 +57,9 @@ public final class Window extends JFrame  {
 		 
 		// toolbar
 		toolbar = new JPanel();
-		
-		JButton bApri = new JButton("Apri");
+		Icon iApri = new ImageIcon("./src/img/load.png");
+		JButton bApri = new JButton("Carica");
+		bApri.setIcon(iApri);
 		bApri.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser choser = new JFileChooser();
@@ -63,23 +69,31 @@ public final class Window extends JFrame  {
 				App.carica(filename);
 			} 
 		});
+		Icon iSalva = new ImageIcon("./src/img/save.png");
 		JButton bSalva = new JButton("Salva");
+		bSalva.setIcon(iSalva);
 		bSalva.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				App.salva();
 			} 
 		});
+		Icon iChiudi = new ImageIcon("./src/img/exit.png");
 		JButton bChiudi = new JButton("Chiudi");
+		bChiudi.setIcon(iChiudi);
 		bChiudi.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
 					App.chiudi();
 			} 
 		});
-		JButton binfo = new JButton("Info");
+		Icon iInfo = new ImageIcon("./src/img/info.png");
+		binfo = new JButton("Info");
+		binfo.setIcon(iInfo);
 		binfo.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				new graphic.Info();
+				JButton button = (JButton)e.getSource();
+				button.setEnabled(false);
 			} 
 		});
 		toolbar.add(bApri);
@@ -102,7 +116,7 @@ public final class Window extends JFrame  {
 		
 		super.add(panel);	
 		super.setVisible(true);
-		super.setBounds(30, 30, 400, 400);
+		super.setBounds(30, 30, 800, 600);
 	}
 
 	protected void caricaFile(String filename) {
