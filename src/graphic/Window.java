@@ -23,12 +23,14 @@ import App.App;
 import core.File;
 import logging.Critical;
 import logging.Info;
+import logging.Warn;
 
 public final class Window extends JFrame  {
 	
 	private File file;
 	
-	private JToolBar toolbar;	
+	private JPanel header;
+	private JPanel toolbar;	
 	private JTable table;
 	
 	public Window(core.File file) {
@@ -40,13 +42,16 @@ public final class Window extends JFrame  {
 		
 		 this.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent we) {
-		    	  App.chiudi();
+		    	  if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
+		    		  App.chiudi();
 		      }
 	    });
 
-				
+		
+		header = new JPanel();
+		 
 		// toolbar
-		toolbar = new JToolBar(JToolBar.HORIZONTAL);
+		toolbar = new JPanel();
 		
 		JButton bApri = new JButton("Apri");
 		bApri.addActionListener(new ActionListener() { 
@@ -67,18 +72,32 @@ public final class Window extends JFrame  {
 		JButton bChiudi = new JButton("Chiudi");
 		bChiudi.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				App.chiudi();
+				if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
+					App.chiudi();
+			} 
+		});
+		JButton binfo = new JButton("Info");
+		binfo.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				new graphic.Info();
 			} 
 		});
 		toolbar.add(bApri);
 		toolbar.add(bSalva);
 		toolbar.add(bChiudi);
+		toolbar.add(binfo);
 		
-		panel.add(toolbar);
+		header.add(toolbar);
+		
+		// input
+		
+		JTextField input = new JTextField(22);
+		header.add(input);
 		
 		// grill
 		table = new JTable(25, 25);
 		
+		panel.add(header);
 		panel.add(table);
 		
 		super.add(panel);	
