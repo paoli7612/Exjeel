@@ -1,8 +1,11 @@
+package App;
 /**
  * Classe principale del progetto. La applicazione verra fatta partire tramite questa classe
  */
 
+import core.File;
 import core.Foglio;
+import graphic.Window;
 import logging.*;
 
 /**s
@@ -11,6 +14,8 @@ import logging.*;
  * Avvio della applicazione
  */
 public class App {
+	
+	public static Window finestra;
 
 	/**
 	 * @param args argomenti passati all'avvio dell'app
@@ -25,6 +30,12 @@ public class App {
 				f.write(i+4, 3, 4f*i/2);
 			}
 			f.print();			
+			
+			File file = new File();
+			file.add(f);
+			
+			finestra = new Window(file);
+			
 		} catch (Exception e) {
 			new Critical(e.toString());
 		}
