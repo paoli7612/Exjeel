@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"App"},{"p":"core","l":"Cella"},{"p":"logging","l":"Critical"},{"p":"logging","l":"Error"},{"p":"core","l":"Foglio"},{"p":"logging","l":"Info"},{"p":"logging","l":"Log"},{"p":"logging","l":"Warn"}];updateSearchResults();

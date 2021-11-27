@@ -1,11 +1,22 @@
+/**
+ * @author Tommaso Paoli
+ */
+
+/**
+ * logging is a group of bar utils for operating on foo things.
+ */
 package logging;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.stream.Stream;
 
+/**
+ * Classe padre per ogni messaggio stampato tramite il modulo logging
+ * 
+ * @author Tommaso Paoli
+ * 
+ * Utilizzabile per settare i parametri del modulo logging
+ * 
+ */
 public class Log {
 
 	public static int NULL = 10;
@@ -49,6 +60,28 @@ public class Log {
 	
 	public static void close() throws Exception {
 		Log.file.close();
+	}
+
+	public static void start(int livello, boolean sysOut, String filename) {
+		try {			
+			Log.setFile(filename);
+		} catch (Exception e) {
+			new Error("Impossibile scrivere sul file di log");
+		}
+		Log.livello = livello;
+		Log.sysOut = sysOut;
+	}
+	
+	public static void stop() {
+		if (Log.file == null) {
+			return;			
+		}
+			
+		try {
+			Log.close();
+		} catch (Exception e) {
+			new Critical("Errore salvataggio file di log");
+		}
 	}
 	
 }

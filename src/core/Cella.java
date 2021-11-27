@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * Ogni celletta del foglio è un oggetto istanziato su questa classe
+ * 
+ * @author Tommaso Paoli
+ */
 public class Cella {
 
 	public Float value;

@@ -1,11 +1,15 @@
 package core;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import logging.Info;
 
+/**
+ * Ogni sheet del documento è un istanza su questa classe
+ * 
+ * @author Tommaso Paoli
+ */
 public class Foglio {
 	
 	public ArrayList<List<Cella>> celle; 
