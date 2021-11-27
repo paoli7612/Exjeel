@@ -110,7 +110,7 @@ public final class Window extends JFrame  {
 		header.add(input);
 		
 		// table
-		table = new JTable(25, 25);
+		table = new Table(10, 10);
 		
 		panel.add(header);
 		panel.add(table);
