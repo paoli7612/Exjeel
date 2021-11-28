@@ -38,6 +38,7 @@ public final class Window extends JFrame  {
 	private JTable table;
 	
 	public JButton binfo;
+	public JTabbedPane tabbed;
 	
 	public Window(core.File file) {
 		super("Exjeel");
@@ -97,6 +98,25 @@ public final class Window extends JFrame  {
 				button.setEnabled(false);
 			} 
 		});
+		Icon iNuovoSheet = new ImageIcon("./src/img/new-sheet.png");
+		JButton bNuovoSheet = new JButton("Nuovo foglio");
+		bNuovoSheet.setIcon(iNuovoSheet);
+		bNuovoSheet.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				file.new_sheet();
+			} 
+		});
+		Icon iEliminaSheet = new ImageIcon("./src/img/del-sheet.png");
+		JButton bEliminaSheet = new JButton("Elimina foglio");
+		bEliminaSheet.setIcon(iEliminaSheet);
+		bEliminaSheet.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				file.del_sheet(App.finestra.tabbed.getSelectedIndex());
+			} 
+		});
+		
+		toolbar.add(bNuovoSheet);
+		toolbar.add(bEliminaSheet);
 		toolbar.add(bApri);
 		toolbar.add(bSalva);
 		toolbar.add(bChiudi);
@@ -104,16 +124,16 @@ public final class Window extends JFrame  {
 		
 		header.add(toolbar);
 		
-		// input
-		
-		JTextField input = new JTextField(22);
-		header.add(input);
 		
 		// table
+		tabbed = new JTabbedPane();
 		table = new Table(10, 10);
+		Table table2 = new Table(10, 10);
+		tabbed.addTab("foglio 1", table);
+		tabbed.addTab("foglio 2", table2);
 		
 		panel.add(header);
-		panel.add(table);
+		panel.add(tabbed);
 		
 		super.add(panel);	
 		super.setVisible(true);
