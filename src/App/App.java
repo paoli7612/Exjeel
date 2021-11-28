@@ -62,4 +62,14 @@ public class App {
 		
 	}
 
+	public static void nuovo_foglio() {
+		new Info("Aggiungi foglio");
+		finestra.aggiungi_foglio();
+	}
+	
+	public static void elimina_foglio(Integer index) {
+		new Info("Elimina foglio index: " + index);
+		finestra.elimina_foglio(index);
+	}
+
 }

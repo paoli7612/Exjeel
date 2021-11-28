@@ -35,7 +35,6 @@ public final class Window extends JFrame  {
 	
 	private JPanel header;
 	private JPanel toolbar;	
-	private JTable table;
 	
 	public JButton binfo;
 	public JTabbedPane tabbed;
@@ -103,7 +102,7 @@ public final class Window extends JFrame  {
 		bNuovoSheet.setIcon(iNuovoSheet);
 		bNuovoSheet.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				file.new_sheet();
+				App.nuovo_foglio();
 			} 
 		});
 		Icon iEliminaSheet = new ImageIcon("./src/img/del-sheet.png");
@@ -111,7 +110,7 @@ public final class Window extends JFrame  {
 		bEliminaSheet.setIcon(iEliminaSheet);
 		bEliminaSheet.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				file.del_sheet(App.finestra.tabbed.getSelectedIndex());
+				App.elimina_foglio(App.finestra.tabbed.getSelectedIndex());
 			} 
 		});
 		
@@ -124,13 +123,9 @@ public final class Window extends JFrame  {
 		
 		header.add(toolbar);
 		
-		
 		// table
 		tabbed = new JTabbedPane();
-		table = new Table(10, 10);
-		Table table2 = new Table(10, 10);
-		tabbed.addTab("foglio 1", table);
-		tabbed.addTab("foglio 2", table2);
+		aggiungi_foglio();
 		
 		panel.add(header);
 		panel.add(tabbed);
@@ -139,9 +134,14 @@ public final class Window extends JFrame  {
 		super.setVisible(true);
 		super.setBounds(30, 30, 800, 600);
 	}
-
-	public void aggiorna() {
-		
+	
+	public void aggiungi_foglio() {
+		JTable table = new Table(10, 10);
+		tabbed.addTab("foglio " + (tabbed.getTabCount()+1), table);	
+	}
+	
+	public void elimina_foglio(Integer index) {
+		tabbed.remove(index);
 	}
 	
 }
