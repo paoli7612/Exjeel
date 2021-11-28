@@ -120,10 +120,8 @@ public final class Window extends JFrame  {
 		super.setBounds(30, 30, 800, 600);
 	}
 
-	protected void caricaFile(String filename) {
-		java.io.File file = new java.io.File(filename);
+	public void aggiorna() {
+		
 	}
 	
-
-
 }

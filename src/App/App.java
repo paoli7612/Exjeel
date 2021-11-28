@@ -16,6 +16,7 @@ import logging.*;
 public class App {
 	
 	public static Window finestra;
+	public static File file;
 
 	/**
 	 * @param args argomenti passati all'avvio dell'app
@@ -31,7 +32,7 @@ public class App {
 			}
 			f.print();			
 			
-			File file = new File();
+			file = new File();
 			file.add(f);
 			
 			finestra = new Window(file);
@@ -52,6 +53,7 @@ public class App {
 
 	public static void carica(String filename) {
 		new Info("Carica: " + filename);
+		file = File.carica(filename);
 		
 	}
 
