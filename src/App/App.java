@@ -17,19 +17,23 @@ public class App {
 	
 	public static Window finestra;
 	public static File file;
+	public static int nFogli;
 
 	/**
 	 * @param args argomenti passati all'avvio dell'app
 	 */
 	public static void main(String[] args) {
 		new Warn("Start app");
-		Log.start(Log.INFO, true, null);
+		Log.start(Log.INFO, true, "log");
 		
 		try {
 			Foglio f = new Foglio();
 			for (int i=0; i<5; i++) {				
 				f.write(i+4, 3, 4f*i/2);
 			}
+			f.write(5, 5, "3");
+			f.write(5, 6, "5");
+			f.write(2, 2, "=(5,5)+(5,6)");
 			f.print();			
 			
 			file = new File();
@@ -39,9 +43,7 @@ public class App {
 			
 		} catch (Exception e) {
 			new Critical(e.toString());
-		}
-
-			
+		}			
 	}
 
 	public static void chiudi() {
@@ -65,6 +67,7 @@ public class App {
 	public static void nuovo_foglio() {
 		new Info("Aggiungi foglio");
 		finestra.aggiungi_foglio();
+		nFogli++;
 	}
 	
 	public static void elimina_foglio(Integer index) {
