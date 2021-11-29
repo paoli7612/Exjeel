@@ -19,6 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardResizeToggleHandler;
 import javax.swing.table.TableCellEditor;
 import javax.xml.stream.XMLStreamException;
 
@@ -51,7 +52,8 @@ public final class Window extends JFrame  {
 		    	  if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
 		    		  App.chiudi();
 		      }
-	    });
+  		});
+
 
 		
 		header = new JPanel();
@@ -125,8 +127,7 @@ public final class Window extends JFrame  {
 		
 		// table
 		tabbed = new JTabbedPane();
-		aggiungi_foglio();
-		
+			
 		panel.add(header);
 		panel.add(tabbed);
 		
@@ -137,11 +138,13 @@ public final class Window extends JFrame  {
 	
 	public void aggiungi_foglio() {
 		JTable table = new Table(10, 10);
-		tabbed.addTab("foglio " + (tabbed.getTabCount()+1), table);	
+		tabbed.addTab("foglio " + App.nFogli, table);	
 	}
 	
 	public void elimina_foglio(Integer index) {
 		tabbed.remove(index);
 	}
+	
+
 	
 }
