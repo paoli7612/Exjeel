@@ -21,7 +21,10 @@ public class Cella {
 
 	public void setValue(float f) {
 		this.value = f;
-		
+	}
+	
+	public float getValue() {
+		return this.value;
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logging.Info;
+import logging.Log;
 
 /**
  * Ogni sheet del documento è un istanza su questa classe
@@ -57,8 +58,57 @@ public class Foglio {
 		return str;
 	}
 
-	public void write(int x, int y, float f) {
-		this.celle.get(y).get(x).setValue(f);
-		
+	public Cella getCella(int x, int y) {
+		return this.celle.get(y).get(x);
 	}
+	 
+	public Cella getCella(Pos pos) {
+		return getCella(pos.getX(), pos.getY());
+	}
+	
+	public void write(int x, int y, float f) {
+		getCella(x, y).setValue(f);	
+	}
+	
+	public void write(Pos pos, float f) {
+		write(pos.getX(), pos.getY(), f);
+	}
+		
+	public void write(int x, int y, String f) {
+		if (f.charAt(0) == '=') {
+			f = Parse.delFirst(f);
+			
+			char cc[] = {'+', '-', '*', '/'};
+			
+			for (int i=0; i<cc.length; i++) {
+				char c = cc[i];
+				String v[] = f.split("\\"+c);
+				if (v.length > 1) {
+					Float c1 = getCella(Pos.parse(v[0])).getValue();
+					Float c2 = getCella(Pos.parse(v[1])).getValue();
+					System.out.println(c1 + " " + c2 + "=" + ((float)c1+c2));
+					float ret = 0;
+					switch (c) {
+					case '+': { ret = c1 + c2; break; }
+					case '-': { ret = c1 - c2; break; }
+					case '*': { ret = c1 * c2; break; }
+					case '/': { ret = c1 / c2; break; }					
+					}
+					new Info(ret + "ris");
+					write(x, y, ret);
+					break;
+				} else {
+					continue;
+				}
+			}
+		} else {
+			write(x, y, Float.parseFloat(f));
+		}
+	}
+	
+	public void write(Pos pos, String f) {
+		write(pos.getX(), pos.getY(), f);
+	}
+	
+	
 }
