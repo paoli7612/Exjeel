@@ -35,12 +35,11 @@ public final class Window extends JFrame  {
 	private File file;
 	
 	private JPanel header;
-	private JPanel toolbar;	
 	
 	public JButton binfo;
 	public JTabbedPane tabbed;
 	
-	public Window(core.File file) {
+	public Window(File file) {
 		super("Exjeel");
 		super.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel();
@@ -49,49 +48,45 @@ public final class Window extends JFrame  {
 		
 		 this.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent we) {
-		    	  if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
-		    		  App.chiudi();
+		    	  chiudi();
 		      }
   		});
-
-
-		
+	
+		// header
 		header = new JPanel();
-		 
-		// toolbar
-		toolbar = new JPanel();
-		Icon iApri = new ImageIcon("./src/img/load.png");
-		JButton bApri = new JButton("Carica");
-		bApri.setIcon(iApri);
-		bApri.addActionListener(new ActionListener() { 
+		
+		newButton("new-sheet", "Nuovo foglio").addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				App.nuovo_foglio();
+			} 
+		});
+		newButton("del-sheet", "Elimina foglio").addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				App.elimina_foglio(App.finestra.tabbed.getSelectedIndex());
+			} 
+		});
+		newButton("load", "Apri").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser choser = new JFileChooser();
 				choser.showOpenDialog(null);
-				java.io.File file = choser.getSelectedFile();
-				String filename = file.getPath();
-				App.carica(filename);
+				try {
+					App.carica(choser.getSelectedFile().getPath());					
+				} catch (Exception e2) {
+					new Error("Non ho caricato un file perchè non è stato selezionato");
+				}
 			} 
 		});
-		Icon iSalva = new ImageIcon("./src/img/save.png");
-		JButton bSalva = new JButton("Salva");
-		bSalva.setIcon(iSalva);
-		bSalva.addActionListener(new ActionListener() { 
+		newButton("save", "Salva").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				App.salva();
 			} 
 		});
-		Icon iChiudi = new ImageIcon("./src/img/exit.png");
-		JButton bChiudi = new JButton("Chiudi");
-		bChiudi.setIcon(iChiudi);
-		bChiudi.addActionListener(new ActionListener() { 
+		newButton("exit", "Chiudi").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
-					App.chiudi();
+				chiudi();
 			} 
 		});
-		Icon iInfo = new ImageIcon("./src/img/info.png");
-		binfo = new JButton("Info");
-		binfo.setIcon(iInfo);
+		binfo = newButton("info", "Info");
 		binfo.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				new graphic.Info();
@@ -99,45 +94,20 @@ public final class Window extends JFrame  {
 				button.setEnabled(false);
 			} 
 		});
-		Icon iNuovoSheet = new ImageIcon("./src/img/new-sheet.png");
-		JButton bNuovoSheet = new JButton("Nuovo foglio");
-		bNuovoSheet.setIcon(iNuovoSheet);
-		bNuovoSheet.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				App.nuovo_foglio();
-			} 
-		});
-		Icon iEliminaSheet = new ImageIcon("./src/img/del-sheet.png");
-		JButton bEliminaSheet = new JButton("Elimina foglio");
-		bEliminaSheet.setIcon(iEliminaSheet);
-		bEliminaSheet.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				App.elimina_foglio(App.finestra.tabbed.getSelectedIndex());
-			} 
-		});
-		
-		toolbar.add(bNuovoSheet);
-		toolbar.add(bEliminaSheet);
-		toolbar.add(bApri);
-		toolbar.add(bSalva);
-		toolbar.add(bChiudi);
-		toolbar.add(binfo);
-		
-		header.add(toolbar);
-		
+			
 		// table
 		tabbed = new JTabbedPane();
 			
 		panel.add(header);
 		panel.add(tabbed);
-		
+				
 		super.add(panel);	
 		super.setVisible(true);
-		super.setBounds(30, 30, 800, 600);
+		super.setBounds(30, 30, 1800, 600);
 	}
 	
 	public void aggiungi_foglio() {
-		JTable table = new Table(10, 10);
+		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
 		tabbed.addTab("foglio " + App.nFogli, table);	
 	}
 	
@@ -145,6 +115,16 @@ public final class Window extends JFrame  {
 		tabbed.remove(index);
 	}
 	
-
+	private JButton newButton(String img, String title) {
+		Icon icon = new ImageIcon("./src/img/%s.png".formatted(img));
+		JButton button= new JButton(title);
+		button.setIcon(icon);
+		header.add(button);
+		return button;	
+	}
 	
+	public void chiudi() {
+		if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
+			App.chiudi();
+	}
 }

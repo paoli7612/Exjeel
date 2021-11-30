@@ -15,6 +15,9 @@ import logging.*;
  */
 public class App {
 	
+	public final static int RIGHE = 20;
+	public final static int COLONNE = 20;
+	
 	public static Window finestra;
 	public static File file;
 	public static int nFogli;
@@ -29,23 +32,43 @@ public class App {
 		try {
 			Foglio f = new Foglio();
 			
+			// ____________ Fibonacci ____________
+			
 			f.write("(A,1)", 0);
 			f.write("(B,1)", 1);
 			f.write("(C,1)", "=(A,1)+(B,1)");
 
 			System.out.println("\n");
 			for (int i=0; i<10; i++) {
-				
 				f.write("(%c,1)".formatted('C'+i), "=(%c,1)+(%c,1)".formatted('A'+i, 'B'+i));
 			}
 			
+			// ____________ _________ ____________
 						
-			f.print();			
+			f.print();
+			
+			Foglio f2 = new Foglio();
+			
+			// ____________ Fibonacci ____________
+			
+			f.write("(A,3)", 0);
+			f.write("(B,3)", 1);
+			f.write("(C,3)", "=(A,3)+(B,3)");
+
+			System.out.println("\n");
+			for (int i=0; i<10; i++) {
+				f.write("(%c,3)".formatted('C'+i), "=(%c,3)+(%c,3)".formatted('A'+i, 'B'+i));
+			}
+			
+			// ____________ _________ ____________
+						
 			
 			file = new File();
 			file.add(f);
+			file.add(f2);
 			new Warn("Stop app");
-			//finestra = new Window(file);
+			finestra = new Window(file);
+			nuovo_foglio();
 			
 		} catch (Exception e) {
 			new Critical(e.toString());

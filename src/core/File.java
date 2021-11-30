@@ -35,4 +35,8 @@ public class File {
 		new logging.Info("Elimina foglio " + i);
 		
 	}
+
+	public int count() {
+		return fogli.size();
+	}
 }
