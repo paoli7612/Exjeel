@@ -13,9 +13,12 @@ public class Cella {
 	public String toString() {
 	
 		if (this.value != null) {
-			return "%.1f".formatted(this.value);			
+			if (this.value < 10)
+				return "%.1f ".formatted(this.value);	
+			else
+				return "%.1f".formatted(this.value);
 		} else {
-			return "   "; 
+			return "    "; 
 		}
 	}
 

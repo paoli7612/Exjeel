@@ -34,12 +34,14 @@ public class App {
 			f.write(5, 5, "3");
 			f.write(5, 6, "5");
 			f.write(2, 2, "=(5,5)+(5,6)");
+			f.write(1, 5, "=(2,2)*(5,5)");
+			f.write(1, 1, "=(1,5)-(2,2)");
 			f.print();			
 			
 			file = new File();
 			file.add(f);
 			
-			finestra = new Window(file);
+			//finestra = new Window(file);
 			
 		} catch (Exception e) {
 			new Critical(e.toString());
