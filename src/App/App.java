@@ -23,32 +23,23 @@ public class App {
 	 * @param args argomenti passati all'avvio dell'app
 	 */
 	public static void main(String[] args) {
-		Log.start(Log.WARN, true, "log");
+		Log.start(Log.INFO, true, "log");
 		new Warn("Start app");
 		
 		try {
 			Foglio f = new Foglio();
-			for (int i=0; i<5; i++) {				
-				f.write(i+4, 3, 4f*i/2);
+			
+			f.write("(A,1)", 0);
+			f.write("(B,1)", 1);
+			f.write("(C,1)", "=(A,1)+(B,1)");
+
+			System.out.println("\n");
+			for (int i=0; i<10; i++) {
+				
+				f.write("(%c,1)".formatted('C'+i), "=(%c,1)+(%c,1)".formatted('A'+i, 'B'+i));
 			}
 			
-			f.write("(A,1)", 2);
-			f.write("(A,2)", 4);
-			f.write("(A,3)", 8);
-			f.write("(A,5)", "=(A,2)+(A,3)");
-			
-			/*
-			
-			f.write(5, 5, "3");
-			f.write(5, 6, "5");
-			f.write(2, 2, "=(5,5)+(5,6)");
-			f.write(1, 5, "=(2,2)*(5,5)");
-			f.write(1, 1, "=(1,5)-(2,2)");
-			f.write(2, 1, "=(1,5)/(2,2)");
-			*/
-			
-			
-			
+						
 			f.print();			
 			
 			file = new File();

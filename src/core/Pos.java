@@ -29,6 +29,7 @@ public final class Pos {
 	}
 	
 	public static Pos parse(String s) {
+		new Info("Pos.parse(%s)".formatted(s));
 		Integer x, y;
 		
 		String ss[] = s.split(",");
@@ -36,7 +37,7 @@ public final class Pos {
 		ss[0] = Parse.delFirst(ss[0]);
 		ss[1] = Parse.delLast(ss[1]);
 		
-		x = (int)ss[0].charAt(0) - 64;
+		x = (int)ss[0].charAt(0) - 65;
 		y = (int)ss[1].charAt(0) - 49;
 		
 		return new Pos(x, y);

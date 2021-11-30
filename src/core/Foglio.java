@@ -59,6 +59,7 @@ public class Foglio {
 	}
 
 	public Cella getCella(int x, int y) {
+		new Info("getCella(%d, %d)".formatted(x, y));
 		return this.celle.get(y).get(x);
 	}
 	 
@@ -79,14 +80,13 @@ public class Foglio {
 	}
 	
 	public void write(int x, int y, float f) {
-		new Info("write %d %d %f".formatted(x, y, f));
 		getCella(x, y).setValue(f);
+		new Info("write %d %d %f".formatted(x, y, f));
 		
 	}
 	
 	public void write(int x, int y, String f) {
 		if (f.charAt(0) == '=') {
-			new Info("Write " +  f);
 			f = Parse.delFirst(f);
 			
 			char cc[] = {'+', '-', '*', '/'};
@@ -104,7 +104,6 @@ public class Foglio {
 						case '*': { ret = c1 * c2; break; }
 						case '/': { ret = c1 / c2; break; }					
 					}
-					new Info("Write %f %c %f = %f ".formatted(c1, c, c2, ret));
 					write(x, y, ret);
 					break;
 				} else {
