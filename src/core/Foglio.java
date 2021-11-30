@@ -66,16 +66,27 @@ public class Foglio {
 		return getCella(pos.getX(), pos.getY());
 	}
 	
-	public void write(int x, int y, float f) {
-		getCella(x, y).setValue(f);	
+	public Cella getCella(String p) {
+		return getCella(Pos.parse(p));
 	}
 	
-	public void write(Pos pos, float f) {
-		write(pos.getX(), pos.getY(), f);
+	public float getValue(Pos pos) {
+		return getCella(pos).getValue();
 	}
+	
+	public float getValue(String p) {
+		return getCella(p).getValue();
+	}
+	
+	public void write(int x, int y, float f) {
+		new Info("write %d %d %f".formatted(x, y, f));
+		getCella(x, y).setValue(f);
 		
+	}
+	
 	public void write(int x, int y, String f) {
 		if (f.charAt(0) == '=') {
+			new Info("Write " +  f);
 			f = Parse.delFirst(f);
 			
 			char cc[] = {'+', '-', '*', '/'};
@@ -84,17 +95,16 @@ public class Foglio {
 				char c = cc[i];
 				String v[] = f.split("\\"+c);
 				if (v.length > 1) {
-					Float c1 = getCella(Pos.parse(v[0])).getValue();
-					Float c2 = getCella(Pos.parse(v[1])).getValue();
-					System.out.println(c1 + " " + c2 + "=" + ((float)c1+c2));
+					Float c1 = getValue(Pos.parse(v[0]));
+					Float c2 = getValue(Pos.parse(v[1]));
 					float ret = 0;
 					switch (c) {
-					case '+': { ret = c1 + c2; break; }
-					case '-': { ret = c1 - c2; break; }
-					case '*': { ret = c1 * c2; break; }
-					case '/': { ret = c1 / c2; break; }					
+						case '+': { ret = c1 + c2; break; }
+						case '-': { ret = c1 - c2; break; }
+						case '*': { ret = c1 * c2; break; }
+						case '/': { ret = c1 / c2; break; }					
 					}
-					new Info(ret + "ris");
+					new Info("Write %f %c %f = %f ".formatted(c1, c, c2, ret));
 					write(x, y, ret);
 					break;
 				} else {
@@ -106,9 +116,20 @@ public class Foglio {
 		}
 	}
 	
+	public void write(Pos pos, float f) {
+		write(pos.getX(), pos.getY(), f);
+	}
+	
 	public void write(Pos pos, String f) {
 		write(pos.getX(), pos.getY(), f);
 	}
 	
+	public void write(String p, String f) {
+		write(Pos.parse(p), f);
+	}
+		
+	public void write(String p, float f) {
+		write(Pos.parse(p), f);
+	}
 	
 }

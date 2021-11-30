@@ -1,5 +1,8 @@
 package core;
 
+import logging.Critical;
+import logging.Info;
+
 public final class Pos {
 
 	private Integer x, y;
@@ -29,8 +32,12 @@ public final class Pos {
 		Integer x, y;
 		
 		String ss[] = s.split(",");
-		x = Integer.parseInt(Parse.delFirst(ss[0]));
-		y = Integer.parseInt(Parse.delLast(ss[1]));
+		
+		ss[0] = Parse.delFirst(ss[0]);
+		ss[1] = Parse.delLast(ss[1]);
+		
+		x = (int)ss[0].charAt(0) - 64;
+		y = (int)ss[1].charAt(0) - 49;
 		
 		return new Pos(x, y);
 	}

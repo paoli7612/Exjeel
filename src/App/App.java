@@ -23,24 +23,37 @@ public class App {
 	 * @param args argomenti passati all'avvio dell'app
 	 */
 	public static void main(String[] args) {
+		Log.start(Log.WARN, true, "log");
 		new Warn("Start app");
-		Log.start(Log.INFO, true, "log");
 		
 		try {
 			Foglio f = new Foglio();
 			for (int i=0; i<5; i++) {				
 				f.write(i+4, 3, 4f*i/2);
 			}
+			
+			f.write("(A,1)", 2);
+			f.write("(A,2)", 4);
+			f.write("(A,3)", 8);
+			f.write("(A,5)", "=(A,2)+(A,3)");
+			
+			/*
+			
 			f.write(5, 5, "3");
 			f.write(5, 6, "5");
 			f.write(2, 2, "=(5,5)+(5,6)");
 			f.write(1, 5, "=(2,2)*(5,5)");
 			f.write(1, 1, "=(1,5)-(2,2)");
+			f.write(2, 1, "=(1,5)/(2,2)");
+			*/
+			
+			
+			
 			f.print();			
 			
 			file = new File();
 			file.add(f);
-			
+			new Warn("Stop app");
 			//finestra = new Window(file);
 			
 		} catch (Exception e) {
