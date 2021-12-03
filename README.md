@@ -3,5 +3,4 @@
 
 
 ### CLI
-<img src="./doc/img/Immagine 2021-11-27 113911.png"></img>
-<img src="doc/img/Cattura2.PNG"></img>
+<img src="doc/img/Immagine 2021-12-03 103000.png"></img>
