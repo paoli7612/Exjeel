@@ -24,7 +24,9 @@ import javax.swing.table.TableCellEditor;
 import javax.xml.stream.XMLStreamException;
 
 import App.App;
+import core.Cella;
 import core.File;
+import core.Foglio;
 import logging.Critical;
 import logging.Error;
 import logging.Info;
@@ -104,11 +106,35 @@ public final class Window extends JFrame  {
 		super.add(panel);	
 		super.setVisible(true);
 		super.setBounds(30, 30, 1800, 600);
+		
+		for (int i=0; i<file.count(); i++) {
+			Foglio foglio = file.getFoglio(i);
+			aggiungi_foglio(foglio);	
+			App.nFogli++;
+		}
 	}
 	
 	public void aggiungi_foglio() {
 		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
 		tabbed.addTab("foglio " + App.nFogli, table);	
+	}
+	
+	public void aggiungi_foglio(JTable table) {
+		tabbed.addTab("foglio " + App.nFogli, table);	
+	}
+		
+	public void aggiungi_foglio(Foglio foglio) {
+		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
+		for (int y=0; y<App.COLONNE; y++){
+			for (int x=0; x<App.RIGHE; x++){
+				Cella c = foglio.getCella(x, y);
+				if (!c.empty()) {
+					new Info(c.value + " ");
+					table.setValueAt(c.value, y+1, x+1);
+				}
+			}
+		}
+		aggiungi_foglio(table);
 	}
 	
 	public void elimina_foglio(Integer index) {
