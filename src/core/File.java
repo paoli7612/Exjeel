@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class File {
 
-	public List<Foglio> fogli;
+	private List<Foglio> fogli;
 	
 	public File() {
 		this.fogli = new ArrayList<Foglio>();
@@ -26,14 +26,17 @@ public class File {
 		return f;
 	}
 
-	public void new_sheet() {
+	public void nuovo_foglio() {
 		new logging.Info("new sheet");
 		
 	}
 
-	public void del_sheet(int i) {
+	public void elimina_foglio(int i) {
 		new logging.Info("Elimina foglio " + i);
-		
+	}
+	
+	public Foglio getFoglio(Integer index) {
+		return fogli.get(index);
 	}
 
 	public int count() {

@@ -26,7 +26,7 @@ public class App {
 	 * @param args argomenti passati all'avvio dell'app
 	 */
 	public static void main(String[] args) {
-		Log.start(Log.INFO, true, "log");
+		Log.start(Log.WARN, true, "log");
 		new Warn("Start app");
 		
 		try {
@@ -44,32 +44,12 @@ public class App {
 			}
 			
 			// ____________ _________ ____________
-						
-			f.print();
-			
-			Foglio f2 = new Foglio();
-			
-			// ____________ Fibonacci ____________
-			
-			f.write("(A,3)", 0);
-			f.write("(B,3)", 1);
-			f.write("(C,3)", "=(A,3)+(B,3)");
-
-			System.out.println("\n");
-			for (int i=0; i<10; i++) {
-				f.write("(%c,3)".formatted('C'+i), "=(%c,3)+(%c,3)".formatted('A'+i, 'B'+i));
-			}
-			
-			// ____________ _________ ____________
-						
 			
 			file = new File();
 			file.add(f);
-			file.add(f2);
-			new Warn("Stop app");
-			finestra = new Window(file);
-			nuovo_foglio();
 			
+			new Warn("Stop app");
+			finestra = new Window(file);		
 		} catch (Exception e) {
 			new Critical(e.toString());
 		}			
