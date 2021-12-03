@@ -30,5 +30,9 @@ public class Cella {
 		return this.value;
 	}
 	
+	public boolean empty() {
+		return this.value == null;
+	}
+	
 	
 }
