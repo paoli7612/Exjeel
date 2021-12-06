@@ -5,11 +5,16 @@ import javax.swing.event.EventListenerList;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import App.App;
+
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import core.Cella;
 import core.Pos;
+import logging.Info;
+import logging.Warn;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
@@ -43,20 +48,39 @@ public class Table extends JTable {
 		
 		super.addKeyListener(new KeyAdapter() {
 		  public void keyPressed(KeyEvent e) {
-		    System.out.println("pressed");
-		    char key = e.getKeyChar();
-		    new logging.Info("Pressed key " + key);
+			Pos pos = new Pos(getSelectedColumn(), getSelectedRow());
+			CellEditor ce = getCellEditor(pos.getY(), pos.getX());
+			new logging.Info(ce.getCellEditorValue() + " ");
+			char key = e.getKeyChar();
+			if (key == '=') {
+			  Object o = getValueAt(pos.getY(), pos.getX());
+			  if (o == null || o.equals("")) {		
+		        write(pos, "=(A,1)+(B,2)");
+		      }
+		    }
+		    if (key == '\n') {
+		    	String s = (String) getValueAt(pos.getY(), pos.getX());
+		    	App.write(pos, s);
+			}
 		  }
-		});
-		
+		});	
 	}
 	
 	public void write(Integer x, Integer y, float value) {
 		
 	}
 	
+	public void write(Pos pos, String s) {
+		setValueAt(s, pos.getY(), pos.getX());
+	}
+	
 	public void write(Pos pos, float value) {
 		write(pos.getX(), pos.getY(), value);
+	}
+	
+	public String read(Pos pos) {
+		new logging.Info(pos.getX() + " " + pos.getY());
+		return (String) getValueAt(pos.getY(), pos.getX());
 	}
 	
 	@Override
