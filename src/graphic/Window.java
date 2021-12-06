@@ -18,9 +18,11 @@ import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardResizeToggleHandler;
 import javax.swing.table.TableCellEditor;
+import javax.swing.text.AttributeSet.ColorAttribute;
 import javax.xml.stream.XMLStreamException;
 
 import App.App;
@@ -131,6 +133,7 @@ public final class Window extends JFrame  {
 				if (!c.empty()) {
 					new Info(c.value + " ");
 					table.setValueAt(c.value, y+1, x+1);
+					
 				}
 			}
 		}

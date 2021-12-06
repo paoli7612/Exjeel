@@ -26,7 +26,7 @@ public class App {
 	 * @param args argomenti passati all'avvio dell'app
 	 */
 	public static void main(String[] args) {
-		Log.start(Log.WARN, true, "log");
+		Log.start(Log.INFO, true, "log");
 		new Warn("Start app");
 		
 		try {

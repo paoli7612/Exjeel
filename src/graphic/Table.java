@@ -1,12 +1,18 @@
 package graphic;
 
 import javax.swing.*;
+import javax.swing.event.EventListenerList;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import java.awt.BorderLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import core.Pos;
 
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 public class Table extends JTable {
 
@@ -34,6 +40,15 @@ public class Table extends JTable {
 		
 		this.setPreferredSize(new Dimension(width*75, height*20));
 		this.setCellSelectionEnabled(showVerticalLines);
+		
+		super.addKeyListener(new KeyAdapter() {
+		  public void keyPressed(KeyEvent e) {
+		    System.out.println("pressed");
+		    char key = e.getKeyChar();
+		    new logging.Info("Pressed key " + key);
+		  }
+		});
+		
 	}
 	
 	public void write(Integer x, Integer y, float value) {
@@ -48,5 +63,5 @@ public class Table extends JTable {
 	public boolean isCellEditable(int row, int column) {
 		return row != 0 && column != 0;
 	}
-	
+			
 }
