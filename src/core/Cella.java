@@ -8,6 +8,7 @@ package core;
 public class Cella {
 
 	public Float value;
+	public Formula formula;
 	
 	@Override
 	public String toString() {
