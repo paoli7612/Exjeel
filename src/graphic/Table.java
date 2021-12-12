@@ -29,7 +29,8 @@ public class Table extends JTable {
 		
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		for (int i=0; i<width; i++) {			
+		
+		for (int i=0; i<App.COLONNE; i++) {			
 			this.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
 		}
 

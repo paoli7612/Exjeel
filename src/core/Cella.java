@@ -12,7 +12,6 @@ public class Cella {
 	
 	@Override
 	public String toString() {
-	
 		if (this.value != null) {
 			if (this.value < 10)
 				return "%.1f ".formatted(this.value);	

@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+import App.App;
 import logging.Info;
 import logging.Log;
 
@@ -13,22 +14,28 @@ import logging.Log;
  */
 public class Foglio {
 	
-	public ArrayList<List<Cella>> celle; 
+	public Cella[][] celle; 
+	private int COLONNE;
+	private int RIGHE;
+	
+	
+	public Foglio(int righe, int colonne) {
+		celle = new Cella[righe][colonne];
+		
+		this.COLONNE = colonne;
+		this.RIGHE = righe;
+		
+		for (int y=0; y<righe; y++)
+			for (int x=0; x<colonne; x++)
+				celle[y][x] = new Cella();
+		
+		new Info("Foglio creato " + righe + " righe, " + colonne + " colonne.");
+	}	
 	
 	public Foglio() {
-		new Info("Avvio costruttore Foglio");
-	
-		celle = new ArrayList<List<Cella>>(25);
-		for (int y=0; y<25; y++) {
-			celle.add(new ArrayList<Cella>(25));
-			for (int x=0; x<25; x++) {
-				celle.get(y).add(new Cella());
-			}
-		}
-		
-		new Info("Foglio creato " + celle.size() + " x " + celle.get(0).size());
-				
-	}	
+		this(App.RIGHE, App.COLONNE);
+		System.out.println(this.toString());
+	}
 	
 	public void print() {
 		System.out.println(this.toString());
@@ -39,18 +46,15 @@ public class Foglio {
 				
 		String str = "\t  ";
 		
-		for (int x=0; x<celle.get(0).size(); x++) {
-			str += Character.toString((char) x + 65 ) + "   ";
+		for (int x=0; x<COLONNE; x++) {
+			str += " " + Character.toString((char) x + 65 ) + "   ";
 		}
 		str += "\n";
 		
-		for (int y=0; y<celle.size(); y++) {
+		for (int y=0; y<RIGHE; y++) {
 			str += y+1 + "\t";
-			List<Cella> riga = celle.get(y);
-			for (int x=0; x<riga.size(); x++) {
-				Cella cella = riga.get(x);
-				str += "|";
-				str += cella.toString();
+			for (int x=0; x<COLONNE; x++) {
+				str += "|" + celle[y][x].toString();
 			}
 			str += "\n";
 		}
@@ -59,8 +63,7 @@ public class Foglio {
 	}
 
 	public Cella getCella(int x, int y) {
-		new Info("getCella(%d, %d)".formatted(x, y));
-		return this.celle.get(y).get(x);
+		return this.celle[y][x];
 	}
 	 
 	public Cella getCella(Pos pos) {

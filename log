@@ -1,8 +1,8 @@
 >>> Start app 
-[()] Aggiungi foglio 
-[()] null  
-[()] null  
-[()] null  
-[()] null  
+[()] Nuovo foglio 
+[()] Foglio creato 5 righe, 10 colonne. 
+>>> 1  
 [()] Chiudi 
+>>> Stop app 
+
 >>> Stop app 

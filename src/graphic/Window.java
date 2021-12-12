@@ -101,7 +101,6 @@ public final class Window extends JFrame  {
 			
 		// table
 		tabbed = new JTabbedPane();
-			
 		panel.add(header);
 		panel.add(tabbed);
 				
@@ -109,20 +108,19 @@ public final class Window extends JFrame  {
 		super.setVisible(true);
 		super.setBounds(30, 30, 1800, 600);
 		
-		for (int i=0; i<file.count(); i++) {
-			Foglio foglio = file.getFoglio(i);
-			aggiungi_foglio(foglio);	
-			App.nFogli++;
+		for (int i=0; i<file.nFogli(); i++) {
+			Foglio f = file.getFoglio(i);
+			aggiungi_foglio();
 		}
 	}
 	
 	public void aggiungi_foglio() {
 		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
-		tabbed.addTab("foglio " + App.nFogli, table);	
+		tabbed.addTab("foglio " + App.file.nFogli(), table);	
 	}
 	
 	public void aggiungi_foglio(JTable table) {
-		tabbed.addTab("foglio " + App.nFogli, table);	
+		tabbed.addTab("foglio " + App.file.nFogli(), table);	
 	}
 		
 	public void aggiungi_foglio(Foglio foglio) {
@@ -133,7 +131,6 @@ public final class Window extends JFrame  {
 				if (!c.empty()) {
 					new Info(c.value + " ");
 					table.setValueAt(c.value, y+1, x+1);
-					
 				}
 			}
 		}

@@ -19,28 +19,29 @@ import logging.*;
  */
 public class App {
 	
-	public final static int RIGHE = 20;
-	public final static int COLONNE = 20;
+	public final static int RIGHE = 10;
+	public final static int COLONNE = 10;
 	
 	public static Window finestra;
 	public static File file;
-	public static int nFogli;
 
 	/**
 	 * @param args argomenti passati all'avvio dell'app
 	 */
 	public static void main(String[] args) {
+		// init logging livello INFO, stampa anche su stdout, scrivi tutto anche sul file 'log'
 		Log.start(Log.INFO, true, "log");
-		file = new File();
 		
 		new Warn("Start app");
-		try {
-			finestra = new Window(file);
-			nuovo_foglio();
-		} catch (Exception e) {
-			new Warn("Stop app");
-			new Critical(e.toString());
-		}			
+		
+		// nuovo file
+		file = new File();
+		new Warn(file.nFogli() + " ");
+		finestra = new Window(file);
+			
+		new Warn("Stop app");
+		
+	
 	}
 	
 	public void fibonacci() {
@@ -60,9 +61,7 @@ public class App {
 		
 		// ____________ _________ ____________
 		
-		file = new File();
 		file.add(f);
-		
 	}
 
 	public static void chiudi() {
@@ -82,8 +81,9 @@ public class App {
 	}
 
 	public static void nuovo_foglio() {
-		nFogli++;
 		new Info("Aggiungi foglio");
+		Foglio foglio = new Foglio();
+		file.add(foglio);
 		finestra.aggiungi_foglio();
 	}
 	
