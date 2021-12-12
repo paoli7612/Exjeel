@@ -36,19 +36,19 @@ import logging.Warn;
 
 public final class Window extends JFrame  {
 	
-	private File file;
+	public static App app;
 	
 	private JPanel header;
 	
 	public JButton binfo;
 	public JTabbedPane tabbed;
-	
-	public Window(File file) {
+		
+	public Window(App app) {
 		super("Exjeel");
+		this.app = app;
+		
 		super.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel();
-
-		this.file = file;
 		
 		 this.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent we) {
@@ -61,12 +61,12 @@ public final class Window extends JFrame  {
 		
 		newButton("new-sheet", "Nuovo foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				App.nuovo_foglio();
+				app.nuovo_foglio();
 			} 
 		});
 		newButton("del-sheet", "Elimina foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				App.elimina_foglio(App.finestra.tabbed.getSelectedIndex());
+				app.elimina_foglio(app.finestra.tabbed.getSelectedIndex());
 			} 
 		});
 		newButton("load", "Apri").addActionListener(new ActionListener() { 
@@ -74,7 +74,7 @@ public final class Window extends JFrame  {
 				JFileChooser choser = new JFileChooser();
 				choser.showOpenDialog(null);
 				try {
-					App.carica(choser.getSelectedFile().getPath());					
+					app.carica(choser.getSelectedFile().getPath());					
 				} catch (Exception e2) {
 					new Error("Non ho caricato un file perchè non è stato selezionato");
 				}
@@ -82,7 +82,7 @@ public final class Window extends JFrame  {
 		});
 		newButton("save", "Salva").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				App.salva();
+				app.salva();
 			} 
 		});
 		newButton("exit", "Chiudi").addActionListener(new ActionListener() { 
@@ -93,7 +93,7 @@ public final class Window extends JFrame  {
 		binfo = newButton("info", "Info");
 		binfo.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				new graphic.Info();
+				new graphic.Info(app);
 				JButton button = (JButton)e.getSource();
 				button.setEnabled(false);
 			} 
@@ -108,23 +108,23 @@ public final class Window extends JFrame  {
 		super.setVisible(true);
 		super.setBounds(30, 30, 1800, 600);
 		
-		for (int i=0; i<file.nFogli(); i++) {
-			Foglio f = file.getFoglio(i);
+		for (int i=0; i<app.file.nFogli(); i++) {
+			Foglio f = app.file.getFoglio(i);
 			aggiungi_foglio();
 		}
 	}
 	
 	public void aggiungi_foglio() {
-		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
-		tabbed.addTab("foglio " + App.file.nFogli(), table);	
+		JTable table = new Table(app, App.COLONNE+1, App.RIGHE+1);
+		tabbed.addTab("foglio " + app.file.nFogli(), table);	
 	}
 	
 	public void aggiungi_foglio(JTable table) {
-		tabbed.addTab("foglio " + App.file.nFogli(), table);	
+		tabbed.addTab("foglio " + app.file.nFogli(), table);	
 	}
 		
 	public void aggiungi_foglio(Foglio foglio) {
-		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
+		JTable table = new Table(app, App.COLONNE+1, App.RIGHE+1);
 		for (int y=0; y<App.RIGHE; y++){
 			for (int x=0; x<App.COLONNE; x++){
 				Cella c = foglio.getCella(x, y);
@@ -149,6 +149,6 @@ public final class Window extends JFrame  {
 	
 	public void chiudi() {
 		if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
-			App.chiudi();
+			app.chiudi();
 	}
 }

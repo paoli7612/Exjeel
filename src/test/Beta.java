@@ -12,12 +12,15 @@ public class Beta {
 		Log.start(Log.INFO, true);
 		App app = new App(args);
 		
-		app.usaFoglio(0);
 		app.scrivi("A1", 0);
 		app.scrivi("B1", 1);
-			
+		
+		app.copia("A1", "A2");
+		app.copia("B1", "B2");
+					
 		for (int i=0; i<8; i++) {
 			app.scrivi(Parse.cc('C'+i)+"1", "=" + Parse.cc('A'+i) + "1+" + Parse.cc('B'+i) + "1");
+			app.scrivi(Parse.cc('C'+i)+"2", "=" + Parse.cc('A'+i) + "2-" + Parse.cc('B'+i) + "2");
 		}
 				
 		app.print(0);

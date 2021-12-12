@@ -1,6 +1,8 @@
 package core;
 
-public class Cella {
+import logging.Critical;
+
+public class Cella implements Cloneable {
 
 	private Float value = 0f;
 	private Formula formula;
@@ -46,4 +48,15 @@ public class Cella {
 		else 
 			this.text = txt;
 	}
+	
+	@Override
+	protected Cella clone() {
+		try {
+			return (Cella) super.clone();			
+		} catch (Exception e) {
+			new Critical("non clonato");
+			return null;
+		}
+	}
+	
 }

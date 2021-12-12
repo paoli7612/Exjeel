@@ -13,10 +13,13 @@ import App.App;
 
 public class Info extends JFrame {
 
-	public Info() {
+	private App app;
+	
+	public Info(App app) {
 
 		super("Info");
-
+		this.app = app;
+		
 		JPanel panel = new JPanel();
 
 		JLabel titolo = new JLabel("Exjeel");
@@ -36,7 +39,7 @@ public class Info extends JFrame {
 		
 		 this.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent we) {
-		    	  App.finestra.binfo.setEnabled(true);
+		    	  app.finestra.binfo.setEnabled(true);
 		      }
 	    });
 		

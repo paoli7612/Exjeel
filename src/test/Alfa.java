@@ -9,7 +9,6 @@ public class Alfa {
 		Log.start(Log.INFO, true);
 		App app = new App(args);
 		
-		app.usaFoglio(0);
 		app.scrivi("A1", 5);
 		app.scrivi("B2", 5);
 		app.scrivi("C3", -2);

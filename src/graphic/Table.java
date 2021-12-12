@@ -21,8 +21,12 @@ import java.awt.event.KeyListener;
 
 public class Table extends JTable {
 
-	public Table(Integer width, Integer height) {
+	private App app;
+	
+	public Table(App app, Integer width, Integer height) {
 		super(width, height);
+		
+		this.app = app;
 		
 		this.setRowHeight(20);
 		this.setAlignmentX(CENTER_ALIGNMENT);
@@ -61,7 +65,7 @@ public class Table extends JTable {
 		    }
 		    if (key == '\n') {
 		    	String s = (String) getValueAt(pos.getY(), pos.getX());
-		    	App.write(pos, s);
+		    	app.scrivi(pos, s);
 			}
 		  }
 		});	

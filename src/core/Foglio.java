@@ -45,6 +45,17 @@ public class Foglio {
 		return str;
 	}
 
+	private void setCella(int x, int y, Cella cella) {
+		if (celle[y][x] != null) {
+			celle[y][x] = null;
+		}
+		celle[y][x] = cella;
+	}
+	
+	private void setCella(Pos pos, Cella cella) {
+		setCella(pos.getX(), pos.getY(), cella);
+	}
+	
 	public Cella getCella(int x, int y) {
 		if (celle[y][x] == null) {
 			celle[y][x] = new Cella(this);
@@ -66,5 +77,10 @@ public class Foglio {
 		getCella(pos).scrivi(txt);
 		
 	}
+
+	public void copia(Pos from, Pos to) {
+		setCella(to, getCella(from).clone());
+	}
+
 		
 }

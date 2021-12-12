@@ -42,5 +42,10 @@ public class File {
 	public void scrivi(Pos pos, String txt) {
 		getFoglio(getSelezionato()).scrivi(pos, txt);
 	}
+
+	public void copia(Pos from, Pos to) {
+		getFoglio(getSelezionato()).copia(from, to);
+		
+	}
 	
 }

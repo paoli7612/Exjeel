@@ -43,8 +43,14 @@ public class Formula {
 		
 		Float v = 0f;
 		
-		for (int i=0; i<this.operandi.size(); i++)
-			v += foglio.getCella(operandi.get(i)).getValue();
+		for (int i=0; i<this.operandi.size(); i++) {
+
+			if (this.operazioni.get(i) == '+') {
+				v += foglio.getCella(operandi.get(i)).getValue();				
+			} else if (this.operazioni.get(i) == '-') {
+				v -= foglio.getCella(operandi.get(i)).getValue();
+			}
+		}
 		
 		return v;
 	}
