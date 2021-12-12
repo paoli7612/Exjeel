@@ -72,6 +72,10 @@ public class Log {
 		Log.sysOut = sysOut;
 	}
 	
+	public static void start(int livello, boolean sysOut) {
+		start(livello, sysOut, null);
+	}
+	
 	public static void stop() {
 		if (Log.file == null) {
 			return;			

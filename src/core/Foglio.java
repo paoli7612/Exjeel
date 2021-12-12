@@ -1,6 +1,7 @@
 package core;
 
 import App.App;
+import logging.Info;
 
 public class Foglio {
 	
@@ -8,10 +9,6 @@ public class Foglio {
 	
 	public Foglio() {
 		celle = new Cella[App.RIGHE][App.COLONNE];
-		
-		for (int y=0; y<App.RIGHE; y++)
-			for (int x=0; x<App.COLONNE; x++)
-				celle[y][x] = new Cella();
 	}
 	
 	public void print() {
@@ -32,7 +29,10 @@ public class Foglio {
 			str += y+1 + "  ";
 			for (int x=0; x<App.COLONNE; x++) {
 				str += "|";
-				str += celle[y][x].toString();
+				if (celle[y][x] == null)
+					str += "     ";
+				else
+					str += celle[y][x].toString();
 			}
 			str += "|";
 			str += "\n";
@@ -46,16 +46,25 @@ public class Foglio {
 	}
 
 	public Cella getCella(int x, int y) {
+		if (celle[y][x] == null) {
+			celle[y][x] = new Cella(this);
+		}
 		return celle[y][x];
 	}
 	
 	public Cella getCella(Pos pos) {
-		return celle[pos.getY()][pos.getX()];
+		return getCella(pos.getX(), pos.getY());
 	}
 
 	public void scrivi(Pos pos, Float value) {
+		new Info("Scrivi " + pos.coord() + ": " + value);
 		getCella(pos).scrivi(value);
 	}
-	
-	
+
+	public void scrivi(Pos pos, String txt) {
+		new Info("Scrivi txt " + pos.coord() + ": " + txt);
+		getCella(pos).scrivi(txt);
+		
+	}
+		
 }

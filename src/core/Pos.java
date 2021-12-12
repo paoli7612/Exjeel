@@ -1,5 +1,7 @@
 package core;
 
+import logging.Info;
+
 public class Pos {
 
 	private Integer x;
@@ -25,7 +27,7 @@ public class Pos {
 	}
 	
 	public String coord() {
-		return "%c%d".formatted(x+64, y);
+		return "%c%d".formatted(x+64+1, y+1);
 	}
 
 	public int getY() {

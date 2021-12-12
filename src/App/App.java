@@ -18,8 +18,8 @@ public class App {
 	public final static int RIGHE = 5;
 	public final static int COLONNE = 10;
 	
-	public static File file;
-	public static Window finestra;
+	public File file;
+	public Window finestra;
 	
 	public App(String[] args) {
 		if (args.length == 0) {
@@ -64,12 +64,20 @@ public class App {
 		
 	}
 
-	public void scrivi(String pos, Float value) {
-		file.scrivi(new Pos(pos), value);
+	public void scrivi(String pos, Float string) {
+		file.scrivi(new Pos(pos), string);
+	}
+
+	public void scrivi(String pos, String string) {
+		file.scrivi(new Pos(pos), string);
 	}
 
 	public void scrivi(String pos, Integer i) {
 		scrivi(pos, i.floatValue());
-		
 	}
+
+	public void print(int i) {
+		file.getFoglio(0).print();
+	}
+
 }

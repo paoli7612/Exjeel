@@ -37,7 +37,10 @@ public class File {
 
 	public void scrivi(Pos pos, Float value) {
 		getFoglio(getSelezionato()).scrivi(pos, value);
-		
+	}
+	
+	public void scrivi(Pos pos, String txt) {
+		getFoglio(getSelezionato()).scrivi(pos, txt);
 	}
 	
 }
