@@ -125,13 +125,11 @@ public final class Window extends JFrame  {
 		
 	public void aggiungi_foglio(Foglio foglio) {
 		JTable table = new Table(App.COLONNE+1, App.RIGHE+1);
-		for (int y=0; y<App.COLONNE; y++){
-			for (int x=0; x<App.RIGHE; x++){
+		for (int y=0; y<App.RIGHE; y++){
+			for (int x=0; x<App.COLONNE; x++){
 				Cella c = foglio.getCella(x, y);
-				if (!c.empty()) {
-					new Info(c.value + " ");
-					table.setValueAt(c.value, y+1, x+1);
-				}
+				table.setValueAt(c.getValue(), y+1, x+1);
+				
 			}
 		}
 		aggiungi_foglio(table);
