@@ -15,8 +15,8 @@ import logging.*;
  */
 public class App {
 	
-	public final static int RIGHE = 20;
-	public final static int COLONNE = 20;
+	public final static int RIGHE = 46;
+	public final static int COLONNE = 46;
 	
 	public File file;
 	public Window finestra;
@@ -38,6 +38,7 @@ public class App {
 		
 		if (window) {			
 			finestra = new Window(this);
+			finestra.resize();
 		}
 	}
 	

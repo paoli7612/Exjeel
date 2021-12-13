@@ -48,7 +48,6 @@ public class Table extends JTable {
 			this.setValueAt(Character.toString((char)64+i), 0, i);
 		}
 		
-		this.setPreferredSize(new Dimension(width*75, height*20));
 		this.setCellSelectionEnabled(showVerticalLines);
 		
 		super.addKeyListener(new KeyAdapter() {
