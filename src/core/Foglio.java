@@ -18,7 +18,7 @@ public class Foglio {
 	@Override
 	public String toString() {
 		
-		String str = "   ";
+		String str = "    ";
 		
 		for (int x=0; x<App.COLONNE; x++) {
 			str += "___" + Character.toString((char) x + 65 ) + "__";
@@ -26,6 +26,8 @@ public class Foglio {
 		str += "\n";
 		
 		for (int y=0; y<App.RIGHE; y++) {
+			if (y < 9)
+				str += " ";
 			str += y+1 + "  ";
 			for (int x=0; x<App.COLONNE; x++) {
 				str += "|";
@@ -37,7 +39,7 @@ public class Foglio {
 			str += "|";
 			str += "\n";
 		}
-		str += "   ";
+		str += "    ";
 		for (int x=0; x<App.COLONNE; x++) {
 			str += "______";
 		}
@@ -80,6 +82,10 @@ public class Foglio {
 
 	public void copia(Pos from, Pos to) {
 		setCella(to, getCella(from).clone());
+	}
+
+	public String leggi(Pos pos) {
+		return getCella(pos).getValue() + "";
 	}
 
 		

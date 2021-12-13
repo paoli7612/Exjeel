@@ -60,7 +60,7 @@ public class Table extends JTable {
 			if (key == '=') {
 			  Object o = getValueAt(pos.getY(), pos.getX());
 			  if (o == null || o.equals("")) {		
-		        write(pos, "=(A,1)+(B,2)");
+		        scrivi(pos, "=(A,1)+(B,2)");
 		      }
 		    }
 		    if (key == '\n') {
@@ -71,16 +71,12 @@ public class Table extends JTable {
 		});	
 	}
 	
-	public void write(Integer x, Integer y, float value) {
-		
+	public void scrivi(Integer x, Integer y, String value) {
+		setValueAt(value, x, y);
 	}
 	
-	public void write(Pos pos, String s) {
-		setValueAt(s, pos.getY(), pos.getX());
-	}
-	
-	public void write(Pos pos, float value) {
-		write(pos.getX(), pos.getY(), value);
+	public void scrivi(Pos pos, String s) {
+		scrivi(pos.getX()+1, pos.getY()+1, s);
 	}
 	
 	public String read(Pos pos) {

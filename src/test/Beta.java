@@ -10,7 +10,7 @@ public class Beta {
 	
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
-		App app = new App(args);
+		App app = new App(false);
 		
 		app.scrivi("A1", 0);
 		app.scrivi("B1", 1);
@@ -21,9 +21,9 @@ public class Beta {
 		for (int i=0; i<8; i++) {
 			app.scrivi(Parse.cc('C'+i)+"1", "=" + Parse.cc('A'+i) + "1+" + Parse.cc('B'+i) + "1");
 			app.scrivi(Parse.cc('C'+i)+"2", "=" + Parse.cc('A'+i) + "2-" + Parse.cc('B'+i) + "2");
-		}
-				
-		app.print(0);
+		}			
+		
+		app.print();
 	}
 
 

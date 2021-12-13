@@ -23,26 +23,43 @@ public class App {
 	
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true, "log.log");
-		new Warn("START APP");	
-		new App(args);
+		new Warn("START APP");
+		new App();
 		new Warn("END APP");
 	}
 
-	public App(String[] args) {
-		if (args.length == 0) {
-			new Info("Nessun argomento - nuovo file");
-			file = new File();
+	public App(String filename, Boolean window) {
+		if (filename == null) {
+			new Info("Nuovo file");
+			file = new File();			
+		} else {			
+			file = new File(filename);
+		}
+		
+		if (window) {			
 			finestra = new Window(this);
-			usaFoglio(0);
-		} else {
-			new Critical("Passasto argomenti");
-			file = new File();
 		}
 	}
 	
-
+	public App(Boolean window) {
+		this(null, window);
+	}
+	
+	public App() {
+		this(true);
+	}
+	
 	public void nuovo_foglio() {
 		 new Warn("Nuovo foglio");
+		 file.nuovo_foglio();
+		 if (finestra != null)
+			 finestra.aggiungi_foglio();
+	}
+	
+	public void nuovo_foglio(Integer count) {
+		for (int i=0; i<count; i++) {
+			nuovo_foglio();
+		}
 	}
 
 	public void salva() {
@@ -68,10 +85,14 @@ public class App {
 	
 	public void scrivi(Pos pos, Float value) {
 		file.scrivi(pos, value);
+		if (finestra != null)
+			finestra.aggiorna(pos);
 	}
 	
 	public void scrivi(Pos pos, String string) {
 		file.scrivi(pos, string);
+		if (finestra != null)
+			finestra.aggiorna(pos);
 	}
 
 	public void scrivi(String pos, Float value) {
@@ -86,13 +107,20 @@ public class App {
 		scrivi(pos, i.floatValue());
 	}
 	
-	public void print(int i) {
-		file.getFoglio(i).print();
-	}
-
 	public void copia(String from, String to) {
 		file.copia(new Pos(from), new Pos(to));
 	}
 
+	public void print(int i) {
+		file.getFoglio(i).print();
+	}
 
+	public void print() {
+		for (int i=0; i<file.nFogli(); i++)
+			print(i);
+	}
+
+	public String leggi(Pos pos) {
+		return file.leggi(pos);
+	}
 }

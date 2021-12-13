@@ -7,7 +7,7 @@ public class Alfa {
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
-		App app = new App(args);
+		App app = new App(false);
 		
 		app.scrivi("A1", 5);
 		app.scrivi("B2", 5);
@@ -16,7 +16,7 @@ public class Alfa {
 		app.scrivi("C5", -14.6f);
 		app.scrivi("C1", 14.6f);
 				
-		app.print(0);		
+		app.print();		
 	}
 
 }

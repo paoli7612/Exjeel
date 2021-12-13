@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
@@ -29,6 +30,7 @@ import App.App;
 import core.Cella;
 import core.File;
 import core.Foglio;
+import core.Pos;
 import logging.Critical;
 import logging.Error;
 import logging.Info;
@@ -115,16 +117,16 @@ public final class Window extends JFrame  {
 	}
 	
 	public void aggiungi_foglio() {
-		JTable table = new Table(app, App.COLONNE+1, App.RIGHE+1);
+		Table table = new Table(app, App.COLONNE+1, App.RIGHE+1);
 		tabbed.addTab("foglio " + app.file.nFogli(), table);	
 	}
 	
-	public void aggiungi_foglio(JTable table) {
+	public void aggiungi_foglio(Table table) {
 		tabbed.addTab("foglio " + app.file.nFogli(), table);	
 	}
 		
 	public void aggiungi_foglio(Foglio foglio) {
-		JTable table = new Table(app, App.COLONNE+1, App.RIGHE+1);
+		Table table = new Table(app, App.COLONNE+1, App.RIGHE+1);
 		for (int y=0; y<App.RIGHE; y++){
 			for (int x=0; x<App.COLONNE; x++){
 				Cella c = foglio.getCella(x, y);
@@ -150,5 +152,15 @@ public final class Window extends JFrame  {
 	public void chiudi() {
 		if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
 			app.chiudi();
+	}
+
+	public void aggiorna(Pos pos, Integer index) {
+		new Info("Window.aggiorna " + pos.coord());
+		Table table = (Table)this.tabbed.getComponentAt(index);
+		table.scrivi(pos, app.leggi(pos));
+	}
+	
+	public void aggiorna(Pos pos) {
+		aggiorna(pos, app.file.getSelezionato());
 	}
 }
