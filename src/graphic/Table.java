@@ -54,13 +54,11 @@ public class Table extends JTable {
 		super.addKeyListener(new KeyAdapter() {
 		  public void keyPressed(KeyEvent e) {
 			Pos pos = new Pos(getSelectedColumn(), getSelectedRow());
-			CellEditor ce = getCellEditor(pos.getY(), pos.getX());
-			new logging.Info(ce.getCellEditorValue() + " ");
 			char key = e.getKeyChar();
 			if (key == '=') {
 			  Object o = getValueAt(pos.getY(), pos.getX());
 			  if (o == null || o.equals("")) {		
-		        scrivi(pos, "=(A,1)+(B,2)");
+		        scrivi(pos, "=A1+B2");
 		      }
 		    }
 		    if (key == '\n') {
