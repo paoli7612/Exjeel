@@ -1,9 +1,13 @@
 package core;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class File {
+public class File implements Serializable {
 
 	private List<Foglio> fogli;
 	private Integer selezionato;
@@ -15,8 +19,16 @@ public class File {
 		setSelezionato(0);
 	}
 
-	public File(String filename) {
-		// TODO Auto-generated constructor stub
+	public void save(String path) throws IOException {
+		FileOutputStream fout = new FileOutputStream(path);
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(this);
+		oos.close();
+	}
+	
+	
+	public static File load(String filename) {
+		return null;
 	}
 
 	public Foglio getFoglio(int i) {

@@ -3,38 +3,17 @@ package graphic;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardResizeToggleHandler;
-import javax.swing.table.TableCellEditor;
-import javax.swing.text.AttributeSet.ColorAttribute;
-import javax.xml.stream.XMLStreamException;
 
 import App.App;
 import core.Cella;
-import core.File;
 import core.Foglio;
 import core.Pos;
 import logging.Critical;
 import logging.Error;
 import logging.Info;
-import logging.Warn;
 
 public final class Window extends JFrame  {
 	
@@ -110,10 +89,7 @@ public final class Window extends JFrame  {
 		super.setVisible(true);
 		super.setBounds(30, 30, 1800, 600);
 		
-		for (int i=0; i<app.file.nFogli(); i++) {
-			Foglio f = app.file.getFoglio(i);
-			aggiungi_foglio();
-		}
+		new Critical(app.file.nFogli() + " nfogli");
 	}
 	
 	public void aggiungi_foglio() {

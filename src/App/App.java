@@ -33,7 +33,7 @@ public class App {
 			new Info("Nuovo file");
 			file = new File();			
 		} else {			
-			file = new File(filename);
+			file = File.load("./data/" + filename);
 		}
 		
 		if (window) {			
@@ -43,6 +43,10 @@ public class App {
 	
 	public App(Boolean window) {
 		this(null, window);
+	}
+	
+	public App(String filename) {
+		this(filename, true);
 	}
 	
 	public App() {
