@@ -8,7 +8,7 @@ public class Gamma {
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
 		App app = new App(true);
-		app.nuovo_foglio(2);
+		app.nuovo_foglio(3);
 		
 		app.usaFoglio(0);
 		app.scrivi("A1", 2);

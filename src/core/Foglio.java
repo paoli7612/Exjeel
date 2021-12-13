@@ -88,5 +88,12 @@ public class Foglio {
 		return getCella(pos).getValue() + "";
 	}
 
+	public String getValue(int x, int y) {
+		if (celle[y][x] == null)
+			return "";
+		else 
+			return celle[y][x].getValue()+"";
+	}
+
 		
 }

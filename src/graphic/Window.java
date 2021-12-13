@@ -89,7 +89,10 @@ public final class Window extends JFrame  {
 		super.setVisible(true);
 		super.setBounds(30, 30, 1800, 600);
 		
-		new Critical(app.file.nFogli() + " nfogli");
+		for (int i=0; i<app.file.nFogli(); i++) {
+			Foglio f = app.file.getFoglio(i);
+			aggiungi_foglio(f);
+		}
 	}
 	
 	public void aggiungi_foglio() {
@@ -105,9 +108,7 @@ public final class Window extends JFrame  {
 		Table table = new Table(app, App.COLONNE+1, App.RIGHE+1);
 		for (int y=0; y<App.RIGHE; y++){
 			for (int x=0; x<App.COLONNE; x++){
-				Cella c = foglio.getCella(x, y);
-				table.setValueAt(c.getValue(), y+1, x+1);
-				
+				table.setValueAt(foglio.getValue(x, y), y+1, x+1);	
 			}
 		}
 		aggiungi_foglio(table);
