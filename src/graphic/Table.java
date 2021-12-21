@@ -26,18 +26,16 @@ public class Table extends JTable {
 	private App app;
 	
 	public Table(App app, Integer width, Integer height) {
+		
 		super(width, height);
-		
 		this.app = app;
-		
 		this.setRowHeight(20);
-		this.setAlignmentX(CENTER_ALIGNMENT);
 		
-		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-		rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		for (int i=0; i<App.COLONNE; i++) {			
-			this.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+		// Allineamento celle centrato
+		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+		r.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i=0; i<App.COLONNE+1; i++) {			
+			this.getColumnModel().getColumn(i).setCellRenderer(r);
 		}
 
 		// imposta NUMERI
@@ -138,6 +136,6 @@ public class Table extends JTable {
 	@Override
 	public boolean isCellEditable(int row, int column) {
 		return row != 0 && column != 0;
-	}
-			
+	}		
+	
 }

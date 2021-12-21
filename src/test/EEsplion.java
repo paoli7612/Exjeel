@@ -1,9 +1,11 @@
 package test;
 
 import App.App;
+import core.Pos;
+import logging.Info;
 import logging.Log;
 
-public class Esplion {
+public class EEsplion {
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
@@ -21,6 +23,8 @@ public class Esplion {
 		app.print();
 		
 		app.scrivi("B1", 80);
+		
+		new Info(app.leggi(new Pos("A3")));
 							
 		app.print();
 

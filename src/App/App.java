@@ -15,12 +15,16 @@ import logging.*;
  */
 public class App {
 	
-	public final static int RIGHE = 46;
-	public final static int COLONNE = 46;
+	public final static int RIGHE = 26;
+	public final static int COLONNE = 26;
 	
 	public File file;
 	public Window finestra;
 	
+    /**
+     * Metodo main per lanciare la applicazione
+     * @param args argomenti passati
+     */
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true, "log.log");
 		new Warn("START APP");

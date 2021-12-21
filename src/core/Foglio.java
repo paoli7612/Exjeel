@@ -75,26 +75,32 @@ public class Foglio {
 	}
 
 	public void scrivi(Pos pos, String txt) {
-		new Info("Scrivi txt " + pos.coord() + ": " + txt);
 		getCella(pos).scrivi(txt);
-		
 	}
 
 	public void copia(Pos from, Pos to) {
 		setCella(to, getCella(from).clone());
 	}
 
-	public String leggi(Pos pos) {
-		return getCella(pos).getValue() + "";
-	}
-
-	public String getValue(int x, int y) {
+	public String getSopra(int x, int y) {
 		if (celle[y][x] == null)
 			return "";
 		else 
-			return celle[y][x].getValue()+"";
+			return celle[y][x].getSopra()+"";
 	}
-
+	
+	public String getSopra(Pos pos) {
+		return getSopra(pos.getX(), pos.getY());
+	}
+	
+	public String getSotto(Pos pos) {
+		if (getCella(pos).getFormula() == null)
+			return getSopra(pos);
+		else {
+			return getCella(pos).getFormula().toString();
+		}
+	}
+	
 	public String leggiSotto(Pos pos) {
 		Cella c = getCella(pos);
 		if (c == null)
@@ -102,7 +108,18 @@ public class Foglio {
 		if (c.getFormula() != null)
 			return c.getFormula().toString();
 		else
-			return c.getValue()+"";
+			return getSopra(pos);
 	}
-		
+
+	public String leggiSopra(Pos pos) {
+		Cella c = getCella(pos);
+		if (c == null)
+			return null;
+		else 
+			return c.getSopra();
+	}
+
+	public String leggiSopra(int x, int y) {
+		return leggiSopra(new Pos(x, y));
+	}		
 }

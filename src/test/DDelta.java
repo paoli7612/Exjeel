@@ -3,7 +3,7 @@ package test;
 import App.App;
 import logging.Log;
 
-public class Delta {
+public class DDelta {
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);

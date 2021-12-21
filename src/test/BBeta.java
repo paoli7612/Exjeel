@@ -6,7 +6,7 @@ import utils.Parse;
 
 // Fibonacci
 
-public class Beta {
+public class BBeta {
 	
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);

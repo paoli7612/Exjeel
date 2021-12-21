@@ -4,7 +4,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,38 +35,39 @@ public final class Window extends JFrame  {
 		super.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel();
 		
-		 this.addWindowListener(new WindowAdapter() {
-		      public void windowClosing(WindowEvent we) {
-		    	  chiudi();
-		      }
-  		});
-		 
-		 super.addComponentListener(new ComponentAdapter() {
-		    public void componentResized(ComponentEvent componentEvent) {
-		    	try {
-		    		resize();					
-				} catch (Exception e) {
-
-				}
-		    }
-		 });
+		// close window
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				chiudi();
+			}
+		});
+ 
+		// resize window
+		super.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent componentEvent) {
+				try { resize(); } catch (Exception e) { /*new Warn(e.toString());*/ }
+			}
+		});
 	
-		// header
+		// _____ panel.header _____
 		header = new JPanel();
-		
 		tf = new JTextField(26);
 		header.add(tf);
+		// _____ _____
 		
+		// button.nuovo
 		newButton("new-sheet", "Nuovo foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				app.nuovo_foglio();
 			} 
 		});
+		// button.elimina
 		newButton("del-sheet", "Elimina foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				app.elimina_foglio(app.finestra.tabbed.getSelectedIndex());
 			} 
 		});
+		// button.apri
 		newButton("load", "Apri").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser choser = new JFileChooser();
@@ -79,16 +79,19 @@ public final class Window extends JFrame  {
 				}
 			} 
 		});
+		// button.salva
 		newButton("save", "Salva").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				app.salva();
 			} 
 		});
+		// button.chiudi
 		newButton("exit", "Chiudi").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				chiudi();
 			} 
 		});
+		// button.info
 		binfo = newButton("info", "Info");
 		binfo.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
@@ -98,28 +101,32 @@ public final class Window extends JFrame  {
 			} 
 		});
 			
-		// table
+		// _____ panel.tabbed _____
 		tabbed = new JTabbedPane();
 		aggiungi_foglio();
 		scrollPane = new JScrollPane(tabbed);
 		elimina_foglio(0);
-
-		header.setPreferredSize(new DimensionUIResource(90000, 60));
 		panel.add(header);
-		panel.add(scrollPane, BorderLayout.CENTER);		
+		panel.add(scrollPane);		
 		super.add(panel);	
+		// _____ _____
 		
 		super.setVisible(true);
 		super.setBounds(30, 30, 1800, 600);
 		
-		for (int i=0; i<app.file.nFogli(); i++) {
-			Foglio f = app.file.getFoglio(i);
-			aggiungi_foglio(f);
+		
+		if (app.file != null) {		
+			// carica il file della applicazione
+			for (int i=0; i<app.file.nFogli(); i++) {
+				Foglio f = app.file.getFoglio(i);
+				aggiungi_foglio(f);
+			}		
 		}
-		
-		
 	}
 	
+	/**
+	 * 
+	 */
 	public void resize() {
 		Dimension d = app.finestra.getContentPane().getSize();
         Dimension dd = new Dimension(d.width-100, d.height/5*4);
@@ -137,9 +144,11 @@ public final class Window extends JFrame  {
 		
 	public void aggiungi_foglio(Foglio foglio) {
 		Table table = new Table(app, App.COLONNE+1, App.RIGHE+1);
-		for (int y=0; y<App.RIGHE; y++){
-			for (int x=0; x<App.COLONNE; x++){
-				table.setValueAt(foglio.getValue(x, y), y+1, x+1);	
+		for (int y=0; y<App.RIGHE; y++) {
+			for (int x=0; x<App.COLONNE; x++) {
+				if (foglio.leggiSopra(x, y) != null) {
+					table.setValueAt(foglio.leggiSopra(x, y), y+1, x+1);	
+				}
 			}
 		}
 		aggiungi_foglio(table);

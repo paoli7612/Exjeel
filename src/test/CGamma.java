@@ -3,7 +3,7 @@ package test;
 import App.App;
 import logging.Log;
 
-public class Gamma {
+public class CGamma {
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);

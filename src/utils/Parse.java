@@ -14,5 +14,18 @@ public class Parse {
 		return (char)i;
 		
 	}
+
+	public static String maxStr(String text, int i) {
+		String r = text;
+		while (r.length() < i) {
+			r = " " + r;
+		};
+		r = r.substring(0, 5);
+		return r;
+	}
+
+	public static String str(Float value) {
+		return value+"";
+	}
 	
 }

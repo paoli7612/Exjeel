@@ -46,13 +46,18 @@ public class Formula {
 		for (int i=0; i<this.operandi.size(); i++) {
 
 			if (this.operazioni.get(i) == '+') {
-				v += foglio.getCella(operandi.get(i)).getValue();				
+				v += foglio.getCella(operandi.get(i)).getValore();				
 			} else if (this.operazioni.get(i) == '-') {
-				v -= foglio.getCella(operandi.get(i)).getValue();
+				v -= foglio.getCella(operandi.get(i)).getValore();
 			}
 		}
 		
 		return v;
+	}
+	
+	@Override
+	public String toString() {
+		return this.espressione;
 	}
 
 }

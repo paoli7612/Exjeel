@@ -65,15 +65,14 @@ public class File implements Serializable {
 
 	public void copia(Pos from, Pos to) {
 		getFoglio(getSelezionato()).copia(from, to);
-		
 	}
 
 	public void nuovo_foglio() {
 		add(new Foglio());
 	}
 
-	public String leggi(Pos pos) {
-		return getFoglioSelezionato().leggi(pos);
+	public String leggiSopra(Pos pos) {
+		return getFoglioSelezionato().leggiSopra(pos);
 	}
 	
 	public String leggiSotto(Pos pos) {
