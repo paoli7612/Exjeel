@@ -15,9 +15,10 @@ public class Delta {
 		
 		app.scrivi("C2", "=A1+B1");
 		
-		app.scrivi("B1", 0);
-			
+		app.print();
 		
+		app.scrivi("B1", 0);
+					
 		app.print();
 
 	}
