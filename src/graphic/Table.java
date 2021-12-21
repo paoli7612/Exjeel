@@ -2,6 +2,7 @@ package graphic;
 
 import javax.swing.*;
 import javax.swing.event.EventListenerList;
+import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
@@ -18,6 +19,7 @@ import logging.Warn;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 public class Table extends JTable {
 
@@ -52,7 +54,7 @@ public class Table extends JTable {
 		
 		super.addKeyListener(new KeyAdapter() {
 		  public void keyPressed(KeyEvent e) {
-			Pos pos = new Pos(getSelectedColumn()-1, getSelectedRow()-1);
+			Pos pos = getSelectedPos();
 			char key = e.getKeyChar();
 			if (key == '=') {
 			  Object o = getValueAt(pos.getY(), pos.getX());
@@ -68,6 +70,56 @@ public class Table extends JTable {
 			}
 		  }
 		});	
+
+		   super.addMouseListener(new MouseInputListener() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Pos p = getSelectedPos();
+				app.finestra.tf.setText(app.leggiSotto(p));
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	
+	private Pos getSelectedPos() {
+		return new Pos(getSelectedColumn()-1, getSelectedRow()-1);
 	}
 	
 	public void scrivi(Integer x, Integer y, String value) {

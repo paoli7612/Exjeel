@@ -50,6 +50,10 @@ public class File implements Serializable {
 	public Integer getSelezionato() {
 		return selezionato;
 	}
+	
+	public Foglio getFoglioSelezionato() {
+		return getFoglio(getSelezionato());
+	}
 
 	public void scrivi(Pos pos, Float value) {
 		getFoglio(getSelezionato()).scrivi(pos, value);
@@ -69,7 +73,11 @@ public class File implements Serializable {
 	}
 
 	public String leggi(Pos pos) {
-		return getFoglio(getSelezionato()).leggi(pos);
+		return getFoglioSelezionato().leggi(pos);
+	}
+	
+	public String leggiSotto(Pos pos) {
+		return getFoglioSelezionato().leggiSotto(pos);
 	}
 	
 }

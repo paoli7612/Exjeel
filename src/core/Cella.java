@@ -15,10 +15,10 @@ public class Cella implements Cloneable {
 	}
 
 	public Float getValue() {
-		if (formula == null)
+		if (getFormula() == null)
 			return value;
 		else {
-			return formula.getValue();
+			return getFormula().getValue();
 		}
 	}
 	
@@ -67,6 +67,10 @@ public class Cella implements Cloneable {
 			new Critical("non clonato");
 			return null;
 		}
+	}
+
+	public Formula getFormula() {
+		return formula;
 	}
 	
 }

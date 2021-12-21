@@ -95,5 +95,14 @@ public class Foglio {
 			return celle[y][x].getValue()+"";
 	}
 
+	public String leggiSotto(Pos pos) {
+		Cella c = getCella(pos);
+		if (c == null)
+			return "";
+		if (c.getFormula() != null)
+			return c.getFormula().toString();
+		else
+			return c.getValue()+"";
+	}
 		
 }

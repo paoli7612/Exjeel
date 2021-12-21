@@ -128,4 +128,8 @@ public class App {
 	public String leggi(Pos pos) {
 		return file.leggi(pos);
 	}
+
+	public String leggiSotto(Pos p) {
+		return file.leggiSotto(p);
+	}
 }
