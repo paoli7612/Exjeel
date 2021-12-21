@@ -62,6 +62,7 @@ public class Table extends JTable {
 		    }
 		    if (key == '\n') {
 		    	String s = (String) getValueAt(pos.getY(), pos.getX());
+		    	new Info(s);
 		    	app.scrivi(pos, s);
 			}
 		  }

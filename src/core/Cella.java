@@ -1,6 +1,7 @@
 package core;
 
 import logging.Critical;
+import logging.Info;
 
 public class Cella implements Cloneable {
 
@@ -43,6 +44,7 @@ public class Cella implements Cloneable {
 	}
 
 	public void scrivi(String txt) {
+		new Info(txt + " " + txt.charAt(0));
 		if (txt.charAt(0) == '=')
 			this.formula = new Formula(txt, foglio);
 		else 

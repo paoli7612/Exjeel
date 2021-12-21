@@ -3,10 +3,8 @@ package graphic;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.print.attribute.standard.SheetCollate;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardResizeToggleHandler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
