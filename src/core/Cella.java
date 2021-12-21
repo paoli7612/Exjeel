@@ -26,8 +26,15 @@ public class Cella implements Cloneable {
 	// ogni cella 4 caratteri (segno)(decine)(unità)(decimi)
 	@Override
 	public String toString() {
-		if (text != null)
-			return text;
+		if (text != null) {
+			String r = text;
+			while (r.length() < 5) {
+				r = " " + r;
+			};
+			r = r.substring(0, 5);
+			return r;
+			
+		}
 		
 		Float v = getValue();
 
@@ -44,7 +51,8 @@ public class Cella implements Cloneable {
 	}
 
 	public void scrivi(String txt) {
-		new Info(txt + " " + txt.charAt(0));
+		if (txt.length() < 1)
+			return;
 		if (txt.charAt(0) == '=')
 			this.formula = new Formula(txt, foglio);
 		else 

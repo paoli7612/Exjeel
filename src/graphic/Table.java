@@ -52,25 +52,26 @@ public class Table extends JTable {
 		
 		super.addKeyListener(new KeyAdapter() {
 		  public void keyPressed(KeyEvent e) {
-			Pos pos = new Pos(getSelectedColumn(), getSelectedRow());
+			Pos pos = new Pos(getSelectedColumn()-1, getSelectedRow()-1);
 			char key = e.getKeyChar();
 			if (key == '=') {
 			  Object o = getValueAt(pos.getY(), pos.getX());
 			  if (o == null || o.equals("")) {		
-		        scrivi(pos, "=A1+B2");
+		        new Info("Startr formula at " + pos.coord());
 		      }
 		    }
 		    if (key == '\n') {
-		    	String s = (String) getValueAt(pos.getY(), pos.getX());
+		    	String s = (String) getValueAt(pos.getY()+1, pos.getX()+1);
+		    	new Info(pos.coord());
 		    	new Info(s);
-		    	app.scrivi(pos, s);
+		    	//app.scrivi(pos, s);
 			}
 		  }
 		});	
 	}
 	
 	public void scrivi(Integer x, Integer y, String value) {
-		setValueAt(value, x, y);
+		setValueAt(value, y, x);
 	}
 	
 	public void scrivi(Pos pos, String s) {

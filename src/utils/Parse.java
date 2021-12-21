@@ -1,7 +1,5 @@
 package utils;
 
-import logging.Info;
-
 public class Parse {
 
 	public static String delFirst(String str) {

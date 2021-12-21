@@ -14,6 +14,7 @@ import core.Foglio;
 import core.Pos;
 import logging.Error;
 import logging.Info;
+import logging.Warn;
 
 import java.awt.event.*;
 
@@ -26,6 +27,7 @@ public final class Window extends JFrame  {
 	public JButton binfo;
 	public JScrollPane scrollPane;
 	public JTabbedPane tabbed;
+	public JTextField tf;
 		
 	public Window(App app) {
 		super("Exjeel");
@@ -52,6 +54,9 @@ public final class Window extends JFrame  {
 	
 		// header
 		header = new JPanel();
+		
+		tf = new JTextField(26);
+		header.add(tf);
 		
 		newButton("new-sheet", "Nuovo foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
