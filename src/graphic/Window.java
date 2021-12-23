@@ -4,6 +4,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +53,16 @@ public final class Window extends JFrame  {
 	
 		// _____ panel.header _____
 		header = new JPanel();
+		
+		// textfield.tf
 		tf = new JTextField(26);
+		tf.addActionListener(new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+	    		app.finestra.enter();
+		    }
+		});
+		
 		header.add(tf);
 		// _____ _____
 		
@@ -92,7 +103,7 @@ public final class Window extends JFrame  {
 			} 
 		});
 		// button.print
-		binfo = newButton("info", "Print");
+		binfo = newButton("print", "Print");
 		binfo.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				app.print();
@@ -113,6 +124,17 @@ public final class Window extends JFrame  {
 		aggiungi_foglio();
 		scrollPane = new JScrollPane(tabbed);
 		elimina_foglio(0);
+		
+		tabbed.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				try {app.finestra.selezionaCella(); } catch (Exception e2) {}
+			}
+		});
+		
+		
+		
 		panel.add(header);
 		panel.add(scrollPane);		
 		super.add(panel);	
@@ -131,9 +153,8 @@ public final class Window extends JFrame  {
 		}
 	}
 	
-	/**
-	 * 
-	 */
+
+
 	public void resize() {
 		Dimension d = app.finestra.getContentPane().getSize();
         Dimension dd = new Dimension(d.width-100, d.height/5*4);
@@ -190,7 +211,18 @@ public final class Window extends JFrame  {
 
 	public void clearTf() {
 		this.tf.setText("");
-		
 	}
+
+	public void selezionaCella() {
+		Table t = (Table) tabbed.getSelectedComponent();
+		t.selezionaCella();
+	}
+
+	protected void enter() {
+		Table table = (Table)this.tabbed.getSelectedComponent();
+		app.scrivi(table.getSelectedPos(), tf.getText());
+		
+	}	
+
 	
 }

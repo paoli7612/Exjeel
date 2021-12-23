@@ -1,6 +1,7 @@
 package core;
 
 import App.App;
+import logging.Critical;
 import logging.Info;
 
 public class Foglio {
@@ -31,10 +32,12 @@ public class Foglio {
 			str += y+1 + "  ";
 			for (int x=0; x<App.COLONNE; x++) {
 				str += "|";
-				if (celle[y][x] == null)
+				if (celle[y][x].getTesto() == null)
 					str += "     ";
-				else
+				else {
+					new Critical("%d %d cella".formatted(x, y));
 					str += celle[y][x].toString();
+				}
 			}
 			str += "|";
 			str += "\n";
