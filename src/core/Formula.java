@@ -39,17 +39,21 @@ public class Formula {
 		}
 	}
 	
-	public Float getValue() {
+	public Float getValue() throws Exception {
 		
 		Float v = 0f;
 		
 		for (int i=0; i<this.operandi.size(); i++) {
-
-			if (this.operazioni.get(i) == '+') {
-				v += foglio.getCella(operandi.get(i)).getValore();				
-			} else if (this.operazioni.get(i) == '-') {
-				v -= foglio.getCella(operandi.get(i)).getValore();
+			try {
+				if (this.operazioni.get(i) == '+') {
+					v += foglio.getCella(operandi.get(i)).getValore();				
+				} else if (this.operazioni.get(i) == '-') {
+					v -= foglio.getCella(operandi.get(i)).getValore();
+				}	
+			} catch (Exception e) {
+				throw new Exception("Impossibile operare con un valore non valido");
 			}
+			
 		}
 		
 		return v;
@@ -57,6 +61,10 @@ public class Formula {
 	
 	@Override
 	public String toString() {
+		return this.espressione;
+	}
+
+	public String leggiSotto() {
 		return this.espressione;
 	}
 

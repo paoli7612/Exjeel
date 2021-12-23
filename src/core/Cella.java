@@ -6,7 +6,6 @@ import utils.Parse;
 
 public class Cella implements Cloneable {
 
-	private Float valore;
 	private Formula formula;
 	private String testo;
 	
@@ -16,20 +15,26 @@ public class Cella implements Cloneable {
 		this.foglio = foglio;
 	}
 	
-	public String getSopra() {
-		if (formula != null)
-			return Parse.str(formula.getValue());
+	public String leggiSopra() {
+		if (formula != null) {
+			try {
+				return Parse.str(formula.getValue());
+			} catch (Exception e) {
+				return "###";
+			}
+		}
 		if (testo != null)
 			return testo;
-		if (valore != null)
-			return Parse.str(valore);
+		new Critical("Cella.getSopra non ha ne testo ne formula");
 		return null;
 	}
 	
-	public void scrivi(Float value) {
-		this.valore = value;
+	public String leggiSotto() {
+		if (formula != null)
+			return formula.leggiSotto();
+		return testo;
 	}
-	
+		
 	public void scrivi(Formula formula) {
 		this.formula = formula;
 	}
@@ -47,18 +52,23 @@ public class Cella implements Cloneable {
 	// String 5 caratteri
 	@Override
 	public String toString() {
-		String str = "";
-		if (testo != null) {
-			str = this.getTesto();
-		} else {			
-			float v = Float.parseFloat(getSopra());
-			if (v >= 0) str += " ";
-			if (v < 10 && v >= -10) str += " ";
-			str += "%.1f".formatted(v);
-		}
-		return Parse.maxStr(str, 5);
+		return toString(5);
 	}
 
+	public String toString(int len) {
+		String str = "";
+		
+		String s = leggiSopra();
+		try {
+			float v = Float.parseFloat(s);
+			
+			str = Parse.str(v);
+		} catch (Exception e) {
+			str = s;
+		}		
+		return Parse.maxStr(str, len);
+	}
+	
 	public String getTesto() {
 		return this.testo;
 	}
@@ -67,22 +77,23 @@ public class Cella implements Cloneable {
 		return this.formula;
 	}
 	
-	public Float getValore() {
-		if (getFormula() != null) {
-			return this.formula.getValue();
-		} else {			
-			return this.valore;
-		}
-	}
-
 	@Override
 	protected Cella clone() {
 		try {
 			return (Cella) super.clone();			
 		} catch (Exception e) {
-			new Critical("non clonato");
+			new Critical("Cella non clonata");
 			return null;
 		}
 	}
-	
+
+	public Float getValore() throws Exception {
+		if (formula != null) {
+			return formula.getValue();
+		} else {
+			return Parse.cfloat(testo);
+		}
+	}
+
+
 }

@@ -55,10 +55,6 @@ public class File implements Serializable {
 		return getFoglio(getSelezionato());
 	}
 
-	public void scrivi(Pos pos, Float value) {
-		getFoglio(getSelezionato()).scrivi(pos, value);
-	}
-	
 	public void scrivi(Pos pos, String txt) {
 		getFoglio(getSelezionato()).scrivi(pos, txt);
 	}

@@ -7,6 +7,7 @@ import core.File;
 import core.Pos;
 import graphic.Window;
 import logging.*;
+import utils.Parse;
 
 /**s
  * @author Tommaso Paoli
@@ -92,16 +93,14 @@ public class App {
 		this.file.setSelezionato(i);
 	}
 	
-	public void scrivi(Pos pos, Float value) {
-		file.scrivi(pos, value);
-		if (finestra != null)
-			finestra.aggiorna(pos);
-	}
-	
 	public void scrivi(Pos pos, String string) {
 		file.scrivi(pos, string);
 		if (finestra != null)
 			finestra.aggiorna(pos);
+	}
+	
+	public void scrivi(Pos pos, Float value) {
+		scrivi(pos, Parse.str(value));
 	}
 
 	public void scrivi(String pos, Float value) {
@@ -129,8 +128,8 @@ public class App {
 			print(i);
 	}
 
-	public String leggi(Pos pos) {
-		return file.leggi(pos);
+	public String leggiSopra(Pos pos) {
+		return file.leggiSopra(pos);
 	}
 
 	public String leggiSotto(Pos p) {

@@ -5,7 +5,7 @@ import core.Pos;
 import logging.Info;
 import logging.Log;
 
-public class EEsplion {
+public class Esplion {
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
@@ -17,14 +17,14 @@ public class EEsplion {
 		app.scrivi("A3", "Somma");
 		app.scrivi("B3", "=A1+B1");
 		
-		app.scrivi("A4", "Sottr");
+		app.scrivi("A4", "Sottrazione");
 		app.scrivi("B4", "=A1-B1");
 		
 		app.print();
 		
 		app.scrivi("B1", 80);
 		
-		new Info(app.leggi(new Pos("A3")));
+		new Info(app.leggiSopra(new Pos("A3")));
 							
 		app.print();
 

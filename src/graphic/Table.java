@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 
 import core.Cella;
 import core.Pos;
+import logging.Critical;
 import logging.Info;
 import logging.Warn;
 
@@ -74,7 +75,12 @@ public class Table extends JTable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Pos p = getSelectedPos();
-				app.finestra.tf.setText(app.leggiSotto(p));
+				if (p.intestazione()) {					
+					app.finestra.clearTf();
+				} else {					
+					app.finestra.tf.setText(app.leggiSotto(p));
+				}
+				
 				
 			}
 

@@ -174,11 +174,16 @@ public final class Window extends JFrame  {
 	public void aggiorna(Pos pos, Integer index) {
 		new Info("Window.aggiorna " + pos.coord());
 		Table table = (Table)this.tabbed.getComponentAt(index);
-		table.scrivi(pos, app.leggi(pos));
+		table.scrivi(pos, app.leggiSopra(pos));
 	}
 	
 	public void aggiorna(Pos pos) {
 		aggiorna(pos, app.file.getSelezionato());
+	}
+
+	public void clearTf() {
+		this.tf.setText("");
+		
 	}
 	
 }

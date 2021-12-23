@@ -69,13 +69,9 @@ public class Foglio {
 		return getCella(pos.getX(), pos.getY());
 	}
 
-	public void scrivi(Pos pos, Float value) {
+	public void scrivi(Pos pos, String value) {
 		new Info("Scrivi " + pos.coord() + ": " + value);
 		getCella(pos).scrivi(value);
-	}
-
-	public void scrivi(Pos pos, String txt) {
-		getCella(pos).scrivi(txt);
 	}
 
 	public void copia(Pos from, Pos to) {
@@ -86,7 +82,7 @@ public class Foglio {
 		if (celle[y][x] == null)
 			return "";
 		else 
-			return celle[y][x].getSopra()+"";
+			return celle[y][x].leggiSopra()+"";
 	}
 	
 	public String getSopra(Pos pos) {
@@ -105,18 +101,16 @@ public class Foglio {
 		Cella c = getCella(pos);
 		if (c == null)
 			return "";
-		if (c.getFormula() != null)
-			return c.getFormula().toString();
 		else
-			return getSopra(pos);
+			return c.leggiSotto();
 	}
 
 	public String leggiSopra(Pos pos) {
 		Cella c = getCella(pos);
 		if (c == null)
-			return null;
+			return "";
 		else 
-			return c.getSopra();
+			return c.leggiSopra();
 	}
 
 	public String leggiSopra(int x, int y) {

@@ -1,7 +1,5 @@
 package core;
 
-import logging.Info;
-
 public class Pos {
 
 	private Integer x;
@@ -36,6 +34,10 @@ public class Pos {
 	
 	public int getX() {
 		return x;
+	}
+
+	public boolean intestazione() {
+		return x < 0 || y < 0;
 	}
 		
 }
