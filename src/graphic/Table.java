@@ -1,25 +1,16 @@
 package graphic;
 
 import javax.swing.*;
-import javax.swing.event.EventListenerList;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 
 import App.App;
 
-import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import core.Cella;
 import core.Pos;
-import logging.Critical;
 import logging.Info;
-import logging.Warn;
-
-import java.awt.*;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 public class Table extends JTable {
@@ -30,7 +21,7 @@ public class Table extends JTable {
 		
 		super(width, height);
 		this.app = app;
-		this.setRowHeight(20);
+		this.setRowHeight(25);
 		
 		// Allineamento celle centrato
 		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
@@ -72,16 +63,18 @@ public class Table extends JTable {
 
 		   super.addMouseListener(new MouseInputListener() {
 			
+			   void selezionato() {
+				   Pos p = getSelectedPos();
+					if (p.intestazione()) {					
+						app.finestra.clearTf();
+					} else {					
+						app.finestra.tf.setText(app.leggiSotto(p));
+					}
+			   }
+			   
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Pos p = getSelectedPos();
-				if (p.intestazione()) {					
-					app.finestra.clearTf();
-				} else {					
-					app.finestra.tf.setText(app.leggiSotto(p));
-				}
-				
-				
+				selezionato();				
 			}
 
 			@Override
@@ -121,11 +114,7 @@ public class Table extends JTable {
 			}
 		});
 	}
-	
-	private Pos getSelectedPos() {
-		return new Pos(getSelectedColumn()-1, getSelectedRow()-1);
-	}
-	
+		
 	public void scrivi(Integer x, Integer y, String value) {
 		setValueAt(value, y, x);
 	}
@@ -134,8 +123,7 @@ public class Table extends JTable {
 		scrivi(pos.getX()+1, pos.getY()+1, s);
 	}
 	
-	public String read(Pos pos) {
-		new logging.Info(pos.getX() + " " + pos.getY());
+	public String leggi(Pos pos) {
 		return (String) getValueAt(pos.getY(), pos.getX());
 	}
 	
@@ -144,4 +132,7 @@ public class Table extends JTable {
 		return row != 0 && column != 0;
 	}		
 	
+	private Pos getSelectedPos() {
+		return new Pos(getSelectedColumn()-1, getSelectedRow()-1);
+	}
 }

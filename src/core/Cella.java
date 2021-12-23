@@ -23,10 +23,8 @@ public class Cella implements Cloneable {
 				return "###";
 			}
 		}
-		if (testo != null)
-			return testo;
-		new Critical("Cella.getSopra non ha ne testo ne formula");
-		return null;
+		return testo;
+		
 	}
 	
 	public String leggiSotto() {

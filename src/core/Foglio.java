@@ -77,26 +77,7 @@ public class Foglio {
 	public void copia(Pos from, Pos to) {
 		setCella(to, getCella(from).clone());
 	}
-
-	public String getSopra(int x, int y) {
-		if (celle[y][x] == null)
-			return "";
-		else 
-			return celle[y][x].leggiSopra()+"";
-	}
-	
-	public String getSopra(Pos pos) {
-		return getSopra(pos.getX(), pos.getY());
-	}
-	
-	public String getSotto(Pos pos) {
-		if (getCella(pos).getFormula() == null)
-			return getSopra(pos);
-		else {
-			return getCella(pos).getFormula().toString();
-		}
-	}
-	
+		
 	public String leggiSotto(Pos pos) {
 		Cella c = getCella(pos);
 		if (c == null)

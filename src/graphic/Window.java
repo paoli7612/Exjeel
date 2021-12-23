@@ -91,6 +91,13 @@ public final class Window extends JFrame  {
 				chiudi();
 			} 
 		});
+		// button.print
+		binfo = newButton("info", "Print");
+		binfo.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				app.print();
+			} 
+		});
 		// button.info
 		binfo = newButton("info", "Info");
 		binfo.addActionListener(new ActionListener() { 
