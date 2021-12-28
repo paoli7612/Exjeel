@@ -36,7 +36,8 @@ public final class Window extends JFrame  {
 		
 		super.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel();
-		
+
+		super.setBounds(30, 30, 1820, 620);
 		// close window
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
@@ -141,7 +142,6 @@ public final class Window extends JFrame  {
 		// _____ _____
 		
 		super.setVisible(true);
-		super.setBounds(30, 30, 1800, 600);
 		
 		
 		if (app.file != null) {		
@@ -159,6 +159,7 @@ public final class Window extends JFrame  {
 		Dimension d = app.finestra.getContentPane().getSize();
         Dimension dd = new Dimension(d.width-100, d.height/5*4);
 		scrollPane.setPreferredSize(dd);
+		new Info("Resize");
 	}
 
 	public void aggiungi_foglio() {
@@ -221,7 +222,6 @@ public final class Window extends JFrame  {
 	protected void enter() {
 		Table table = (Table)this.tabbed.getSelectedComponent();
 		app.scrivi(table.getSelectedPos(), tf.getText());
-		
 	}	
 
 	

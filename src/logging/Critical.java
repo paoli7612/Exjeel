@@ -17,4 +17,8 @@ public final class Critical extends Log {
 		
 	}
 	
+	public Critical(Exception e) {
+		this(e.toString());
+	}
+	
 }

@@ -45,11 +45,9 @@ public class Log {
 					new Error("File di log non scrivibile");
 				}
 			}	
-		}
-			
-			
+		}		
 	}
-	
+		
 	public Log(int livello, String messaggio, String base) {
 		this(livello, messaggio, base, "");
 	}
