@@ -74,5 +74,12 @@ public class File implements Serializable {
 	public String leggiSotto(Pos pos) {
 		return getFoglioSelezionato().leggiSotto(pos);
 	}
+
+	public void elimina_foglio(int index) {
+		fogli.remove(index);
+		if (selezionato == index)
+			selezionato = 0;
+		
+	}
 	
 }

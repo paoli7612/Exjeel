@@ -32,10 +32,9 @@ public class Foglio {
 			str += y+1 + "  ";
 			for (int x=0; x<App.COLONNE; x++) {
 				str += "|";
-				if (celle[y][x].getTesto() == null)
+				if (celle[y][x] == null)
 					str += "     ";
 				else {
-					new Critical("%d %d cella".formatted(x, y));
 					str += celle[y][x].toString();
 				}
 			}

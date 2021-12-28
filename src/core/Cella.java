@@ -13,6 +13,7 @@ public class Cella implements Cloneable {
 	
 	public Cella(Foglio foglio) {
 		this.foglio = foglio;
+		testo = "";
 	}
 	
 	public String leggiSopra() {
@@ -24,7 +25,6 @@ public class Cella implements Cloneable {
 			}
 		}
 		return testo;
-		
 	}
 	
 	public String leggiSotto() {
@@ -59,7 +59,6 @@ public class Cella implements Cloneable {
 		String s = leggiSopra();
 		try {
 			float v = Float.parseFloat(s);
-			
 			str = Parse.str(v);
 		} catch (Exception e) {
 			str = s;
