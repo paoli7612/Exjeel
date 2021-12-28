@@ -6,10 +6,12 @@ import logging.Info;
 import logging.Log;
 
 public class Esplion {
+	
+	public static App app;
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
-		App app = new App(true);
+		app = new App(true);
 		
 		app.scrivi("A1", 10);
 		app.scrivi("B1", 15);
@@ -27,6 +29,14 @@ public class Esplion {
 		new Info(app.leggiSopra(new Pos("A3")));
 							
 		app.print();
+		
+		utils.Thread.setTimeout(new Runnable() {
+			
+			@Override
+			public void run() {
+				Esplion.app.finestra.resize();
+			}
+		}, 1000);
 
 
 	}

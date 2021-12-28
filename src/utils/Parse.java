@@ -1,5 +1,6 @@
 package utils;
 
+
 public class Parse {
 
 	public static String delFirst(String str) {
