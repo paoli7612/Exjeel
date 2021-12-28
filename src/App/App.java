@@ -32,7 +32,13 @@ public class App {
 		new App();
 		new Warn("END APP");
 	}
-
+	
+	
+	/**
+	 * Costruttore applicazione
+	 * @param filename specifica il file da aprire (null se avviamo la applicazione per creare un nuovo file)
+	 * @param window specifica se utilizzare o meno l'interfaccia grafica
+	 */
 	public App(String filename, Boolean window) {
 		if (filename == null) {
 			new Info("Nuovo file");
@@ -47,18 +53,32 @@ public class App {
 		}
 	}
 	
+	/**
+	 * Costruttore applicazione per avviare la applicazione senza partire da un file gia esistente
+	 * @param window specifica se utilizzare o meno l'interfaccia grafica
+	 */
 	public App(Boolean window) {
 		this(null, window);
 	}
 	
+	/**
+	 * Costruttore applicazione specificando il file da cui partire
+	 * @param filename specifica il file da aprire (null se avviamo la applicazione per creare un nuovo file)
+	 */
 	public App(String filename) {
 		this(filename, true);
 	}
 	
+	/**
+	 * Costruttore applicazione senza argomenti (usa interfaccia grafica e non aprire un file esistente)
+	 */
 	public App() {
 		this(true);
 	}
 	
+	/**
+	 * Crea un nuvo foglio sul file attuale
+	 */
 	public void nuovo_foglio() {
 		 new Warn("Nuovo foglio");
 		 file.nuovo_foglio();
@@ -66,12 +86,19 @@ public class App {
 			 finestra.aggiungi_foglio();
 	}
 	
+	/**
+	 * Lancia nuovo_foglio() per count volte
+	 * @param count numero di fogli da creare
+	 */
 	public void nuovo_foglio(Integer count) {
 		for (int i=0; i<count; i++) {
 			nuovo_foglio();
 		}
 	}
 
+	/**
+	 * Salva il file attuale
+	 */
 	public void salva() {
 		new Warn("Salva");
 	}
@@ -87,6 +114,9 @@ public class App {
 
 	public void elimina_foglio(int index) {
 		new Warn("Elimina foglio : " + index);
+		file.elimina_foglio(index);
+		if (finestra != null) 
+			finestra.elimina_foglio(index);
 	}
 
 	public void usaFoglio(int i) {
