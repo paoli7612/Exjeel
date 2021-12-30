@@ -122,19 +122,13 @@ public final class Window extends JFrame  {
 			
 		// _____ panel.tabbed _____
 		tabbed = new JTabbedPane();
-		aggiungi_foglio();
 		scrollPane = new JScrollPane(tabbed);
-		elimina_foglio(0);
-		
 		tabbed.addChangeListener(new ChangeListener() {
-			
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				try {app.finestra.selezionaCella(); } catch (Exception e2) {}
 			}
 		});
-		
-		
 		
 		panel.add(header);
 		panel.add(scrollPane);		
@@ -153,26 +147,24 @@ public final class Window extends JFrame  {
 		}
 	}
 	
-
-
 	public void resize() {
+		new Info("Resize");
 		Dimension d = app.finestra.getContentPane().getSize();
         Dimension dd = new Dimension(d.width-100, d.height/5*4);
 		scrollPane.setPreferredSize(dd);
-		new Info("Resize");
-	}
-
-	public void aggiungi_foglio() {
-		Table table = new Table(app, App.COLONNE+1, App.RIGHE+1);
-		tabbed.addTab("foglio " + app.file.nFogli(), table);	
 	}
 	
 	public void aggiungi_foglio(Table table) {
-		tabbed.addTab("foglio " + app.file.nFogli(), table);	
+		new Info("Nuovo foglio");
+		tabbed.addTab(app.file.prossimo_nome(), table);	
 	}
-		
+	
+	public void aggiungi_foglio() {
+		aggiungi_foglio(new Table(app));
+	}
+
 	public void aggiungi_foglio(Foglio foglio) {
-		Table table = new Table(app, App.COLONNE+1, App.RIGHE+1);
+		Table table = new Table(app);
 		for (int y=0; y<App.RIGHE; y++) {
 			for (int x=0; x<App.COLONNE; x++) {
 				if (foglio.leggiSopra(x, y) != null) {
@@ -184,6 +176,7 @@ public final class Window extends JFrame  {
 	}
 	
 	public void elimina_foglio(Integer index) {
+		new Info("Rimuovi foglio");
 		tabbed.remove(index);
 	}
 	

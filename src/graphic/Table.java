@@ -17,9 +17,9 @@ public class Table extends JTable {
 
     private App app;
 
-    public Table(App app, Integer width, Integer height) {
+    public Table(App app) {
 
-        super(width, height);
+        super(app.COLONNE+1, app.RIGHE+1);
         this.app = app;
         this.setRowHeight(25);
 
