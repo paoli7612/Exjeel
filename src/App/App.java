@@ -22,6 +22,8 @@ public class App {
 	public File file;
 	public Window finestra;
 	
+	public final String info = "Clone minimale di un editor di fogli elettronici";
+	
     /**
      * Metodo main per lanciare la applicazione
      * @param args argomenti passati
@@ -41,7 +43,7 @@ public class App {
 	 */
 	public App(String filename, Boolean window) {
 		if (filename == null) {
-			new Info("Nuovo file");
+			new Info("Nuovo file vuoto");
 			file = new File();			
 		} else {			
 			file = File.load("./data/" + filename);
@@ -49,7 +51,6 @@ public class App {
 		
 		if (window) {			
 			finestra = new Window(this);
-			finestra.resize();
 		}
 	}
 	
@@ -103,15 +104,26 @@ public class App {
 		new Warn("Salva");
 	}
 
+	/**
+	 * Chiudi applicazione (supponendo sia aperta la finestra)
+	 */
 	public void chiudi() {
 		new Warn("Chiudi");
 		finestra.dispose();
 	}
 
+	/**
+	 * Carica da file
+	 * @param path file da aprire
+	 */
 	public void carica(String path) {
 		new Warn("Carica: " + path);
 	}
 
+	/**
+	 * Elimina un foglio dal file
+	 * @param index indice del foglio
+	 */
 	public void elimina_foglio(int index) {
 		new Warn("Elimina foglio : " + index);
 		file.elimina_foglio(index);
@@ -119,50 +131,77 @@ public class App {
 			finestra.elimina_foglio(index);
 	}
 
+	/**
+	 * Seleziona il foglio da usare
+	 * @param i
+	 */
 	public void usaFoglio(int i) {
 		this.file.setSelezionato(i);
 	}
 	
-	public void scrivi(Pos pos, String string) {
-		file.scrivi(pos, string);
+	/**
+	 * Scrivi value nella cella in posizione pos
+	 * @param pos dove?
+	 * @param value cosa?
+	 */
+	public void scrivi(Pos pos, String value) {
+		file.scrivi(pos, value);
 		if (finestra != null)
 			finestra.aggiorna(pos);
-	}
-	
-	public void scrivi(Pos pos, Float value) {
-		scrivi(pos, Parse.str(value));
-	}
-
-	public void scrivi(String pos, Float value) {
-		scrivi(new Pos(pos), value);
 	}
 
 	public void scrivi(String pos, String string) {
 		scrivi(new Pos(pos), string);
 	}
-
-	public void scrivi(String pos, Integer i) {
-		scrivi(pos, i.floatValue());
+	
+	public void scrivi(String pos, int i) {
+		scrivi(pos, i);
 	}
 	
+	/**
+	 * Copia la cella a from nella cella to
+	 * @param from copia
+	 * @param to incolla
+	 */
 	public void copia(String from, String to) {
 		file.copia(new Pos(from), new Pos(to));
 	}
 
+	/**
+	 * Lancia il metodo print del voglio i
+	 * @param i indice del foglio da stampare
+	 */
 	public void print(int i) {
 		file.getFoglio(i).print();
 	}
 
+	/**
+	 * Lancia il metodo print di tutti i foglio del file attuale
+	 */
 	public void print() {
 		for (int i=0; i<file.nFogli(); i++)
 			print(i);
 	}
 
+	/**
+	 * Legge e ritorna il contenuto "sopra" della cella a posizione pos
+	 * @param pos posizione della cella
+	 * @return contenuto della cella
+	 */
 	public String leggiSopra(Pos pos) {
 		return file.leggiSopra(pos);
 	}
 
+	/**
+	 * Legge e ritorna il contenuto "sotto" della cella a posizione pos
+	 * @param pos della cella
+	 * @return contenuto della cella
+	 */
 	public String leggiSotto(Pos p) {
 		return file.leggiSotto(p);
 	}
+
+
+
+
 }
