@@ -4,8 +4,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import logging.Info;
 
 public class File implements Serializable {
 
@@ -22,7 +26,7 @@ public class File implements Serializable {
 	}
 
 	public void save(String path) throws IOException {
-		FileOutputStream fout = new FileOutputStream(path);
+		FileOutputStream fout = new FileOutputStream("data/" + path);
 		ObjectOutputStream oos = new ObjectOutputStream(fout);
 		oos.writeObject(this);
 		oos.close();
@@ -89,7 +93,15 @@ public class File implements Serializable {
 
 	public void reset() {
 		fogli.clear();
-		tFogli = 0;
+		tFogli = 1;
+	}
+
+	public void save() throws IOException {
+		if (filename == null) {
+			filename = new SimpleDateFormat("yyyyMMddHHmm'.txt'").format(new Date());
+		}
+		new Info("Salva: " + filename);
+		save(filename);
 	}
 	
 }

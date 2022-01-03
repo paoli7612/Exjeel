@@ -102,6 +102,11 @@ public class App {
 	 */
 	public void salva() {
 		new Warn("Salva");
+		try {
+			file.save();			
+		} catch (Exception e) {
+			new Critical("Non salvato");
+		}
 	}
 
 	/**
@@ -129,8 +134,10 @@ public class App {
 		file.elimina_foglio(index);
 		if (finestra != null) 
 			finestra.elimina_foglio(index);
-		if (file.nFogli() == 0)
-			file.reset();			
+		if (file.nFogli() == 0) {
+			file.reset();
+			nuovo_foglio();
+		}	
 	}
 
 	/**
@@ -206,11 +213,5 @@ public class App {
 	public String leggiSotto(Pos p) {
 		return file.leggiSotto(p);
 	}
-
-
-
-
-
-
 
 }

@@ -127,6 +127,7 @@ public final class Window extends JFrame  {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				try {
+					app.file.setSelezionato(app.finestra.tabbed.getSelectedIndex());
 					app.finestra.selezionaCella();
 				} catch (Exception e2) {}
 			}
