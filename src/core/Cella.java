@@ -1,4 +1,7 @@
 package core;
+/**
+ * Classe per ogni cella, che può contenere una formula/un numero/testo
+*/
 
 import logging.Critical;
 import logging.Info;

@@ -11,7 +11,8 @@ public class File implements Serializable {
 
 	private List<Foglio> fogli;
 	private Integer selezionato;
-	private int tFogli;
+	private int tFogli = 1;
+	private String filename;
 	
 	public File() {
 		fogli = new ArrayList<Foglio>();
@@ -84,6 +85,11 @@ public class File implements Serializable {
 	
 	public String prossimo_nome() {
 		return "Foglio %d".formatted(tFogli++);
+	}
+
+	public void reset() {
+		fogli.clear();
+		tFogli = 0;
 	}
 	
 }

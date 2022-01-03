@@ -129,6 +129,8 @@ public class App {
 		file.elimina_foglio(index);
 		if (finestra != null) 
 			finestra.elimina_foglio(index);
+		if (file.nFogli() == 0)
+			file.reset();			
 	}
 
 	/**
@@ -156,6 +158,10 @@ public class App {
 	
 	public void scrivi(String pos, int i) {
 		scrivi(pos, i);
+	}
+	
+	public void scrivi(String pos, float f) {
+		scrivi(pos, Parse.str(f));
 	}
 	
 	/**
@@ -200,6 +206,9 @@ public class App {
 	public String leggiSotto(Pos p) {
 		return file.leggiSotto(p);
 	}
+
+
+
 
 
 

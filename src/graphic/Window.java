@@ -126,7 +126,9 @@ public final class Window extends JFrame  {
 		tabbed.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				try {app.finestra.selezionaCella(); } catch (Exception e2) {}
+				try {
+					app.finestra.selezionaCella();
+				} catch (Exception e2) {}
 			}
 		});
 		
@@ -200,6 +202,7 @@ public final class Window extends JFrame  {
 	}
 	
 	public void aggiorna(Pos pos) {
+		new Info(app.file.getSelezionato() + " Selezionato");
 		aggiorna(pos, app.file.getSelezionato());
 	}
 
@@ -213,8 +216,11 @@ public final class Window extends JFrame  {
 	}
 
 	protected void enter() {
-		Table table = (Table)this.tabbed.getSelectedComponent();
-		app.scrivi(table.getSelectedPos(), tf.getText());
+		app.file.setSelezionato(tabbed.getSelectedIndex());
+		new Info(tabbed.getTitleAt(tabbed.getSelectedIndex()));
+		Table table = (Table) this.tabbed.getSelectedComponent();
+		Pos p = table.getSelectedPos();
+		app.scrivi(p, tf.getText());
 	}	
 
 	
