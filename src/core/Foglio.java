@@ -3,6 +3,7 @@ package core;
 import App.App;
 import logging.Critical;
 import logging.Info;
+import utils.Parse;
 
 public class Foglio {
 	
@@ -48,17 +49,6 @@ public class Foglio {
 		
 		return str;
 	}
-
-	private void setCella(int x, int y, Cella cella) {
-		if (celle[y][x] != null) {
-			celle[y][x] = null;
-		}
-		celle[y][x] = cella;
-	}
-	
-	private void setCella(Pos pos, Cella cella) {
-		setCella(pos.getX(), pos.getY(), cella);
-	}
 	
 	public Cella getCella(int x, int y) {
 		if (celle[y][x] == null) {
@@ -71,9 +61,19 @@ public class Foglio {
 		return getCella(pos.getX(), pos.getY());
 	}
 
-	public void scrivi(Pos pos, String value) {
-		new Info("Scrivi " + pos.coord() + ": " + value);
-		getCella(pos).scrivi(value);
+	public void scrivi(Pos pos, String value) throws Exception {
+		try {
+			setCella(pos, new Cella(this, Parse.cfloat(value)));
+		} catch (Exception e) {
+			if (value.charAt(0) == '=')
+				setCella(pos, new Formula(this, value));
+			else 
+				setCella(pos, new Testo(this, value));
+		}
+	}
+	
+	private void setCella(Pos pos, Cella c) {
+		celle[pos.getY()][pos.getX()] = c;
 	}
 
 	public void copia(Pos from, Pos to) {

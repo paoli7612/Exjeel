@@ -26,8 +26,12 @@ public class Parse {
 		return r;
 	}
 
-	public static String str(Float value) {
-		return value + "";
+	public static String str(int i) {
+		return "%d".formatted(i);
+	}
+	
+	public static String str(float f) {
+		return "%.2f".formatted(f);
 	}
 
 	public static String str(Float v, int len) {
@@ -72,12 +76,14 @@ public class Parse {
 		return (int) (v % 10);
 	}
 
-	public static Float cfloat(String str) throws Exception{
+	public static Float cfloat(String str) throws Exception {
 		try {
 			return Float.parseFloat(str);
 		} catch (Exception e) {
 			throw new Exception("...");
 		}
 	}
+
+
 
 }

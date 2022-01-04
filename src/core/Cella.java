@@ -4,51 +4,38 @@ package core;
 */
 
 import logging.Critical;
-import logging.Info;
 import utils.Parse;
 
 public class Cella implements Cloneable {
-
-	private Formula formula;
-	private String testo;
 	
-	private Foglio foglio;
+	protected Foglio foglio;
+	private float v;
 	
 	public Cella(Foglio foglio) {
 		this.foglio = foglio;
-		testo = "";
 	}
-	
+		
+	public Cella(Foglio foglio, float value) {
+		this(foglio);
+		this.v = value;
+	}
+
 	public String leggiSopra() {
-		if (formula != null) {
-			try {
-				return Parse.str(formula.getValue());
-			} catch (Exception e) {
-				return "###";
-			}
-		}
-		return testo;
+		return Parse.str(v);
 	}
 	
 	public String leggiSotto() {
-		if (formula != null)
-			return formula.leggiSotto();
-		return testo;
-	}
-		
-	public void scrivi(Formula formula) {
-		this.formula = formula;
+		return Parse.str(v);
 	}
 	
-	public void scrivi(String txt) {
-		if (txt.length() == 0)
-			return;
-		if (txt.charAt(0) == '=')
-			scrivi(new Formula(txt, foglio));
-		else 
-			this.testo = txt;
+	public void scrivi(float v) {
+		this.v = v;
 	}
-		 
+	
+	public void scrivi(String s) throws Exception {
+		scrivi(Parse.cfloat(s));
+	}
+				 
 	// Float (segno)(decine)(unità)(decimi)
 	// String 5 caratteri
 	@Override
@@ -68,15 +55,7 @@ public class Cella implements Cloneable {
 		}		
 		return Parse.maxStr(str, len);
 	}
-	
-	public String getTesto() {
-		return this.testo;
-	}
-	
-	public Formula getFormula() {
-		return this.formula;
-	}
-	
+		
 	@Override
 	protected Cella clone() {
 		try {
@@ -86,14 +65,8 @@ public class Cella implements Cloneable {
 			return null;
 		}
 	}
-
-	public Float getValore() throws Exception {
-		if (formula != null) {
-			return formula.getValue();
-		} else {
-			return Parse.cfloat(testo);
-		}
+	
+	protected Float getValore() {
+		return this.v;
 	}
-
-
 }

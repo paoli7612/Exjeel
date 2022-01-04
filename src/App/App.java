@@ -17,21 +17,20 @@ import utils.Parse;
 public class App {
 	
 	public final static int RIGHE = 26;
-	public final static int COLONNE = 26;
+	public final static int COLONNE = 40;
+	public final String info = "Clone minimale di un editor di fogli elettronici";
 	
 	public File file;
 	public Window finestra;
-	
-	public final String info = "Clone minimale di un editor di fogli elettronici";
 	
     /**
      * Metodo main per lanciare la applicazione
      * @param args argomenti passati
      */
 	public static void main(String[] args) {
-		Log.start(Log.INFO, true, "log.log");
+		Log.start(Log.INFO, true, "log");
 		new Warn("START APP");
-		new App();
+		new App(false);
 		new Warn("END APP");
 	}
 	
@@ -154,7 +153,11 @@ public class App {
 	 * @param value cosa?
 	 */
 	public void scrivi(Pos pos, String value) {
-		file.scrivi(pos, value);
+		try {
+			file.scrivi(pos, value);			
+		} catch (Exception e) {
+			new Critical("App.scrivi " + value + " at " + pos.coord());
+		}
 		if (finestra != null)
 			finestra.aggiorna(pos);
 	}
@@ -164,7 +167,7 @@ public class App {
 	}
 	
 	public void scrivi(String pos, int i) {
-		scrivi(pos, i);
+		scrivi(pos, Parse.str(i));
 	}
 	
 	public void scrivi(String pos, float f) {

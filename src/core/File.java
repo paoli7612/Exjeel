@@ -13,6 +13,7 @@ import logging.Info;
 
 public class File implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private List<Foglio> fogli;
 	private Integer selezionato;
 	private int tFogli = 1;
@@ -61,12 +62,12 @@ public class File implements Serializable {
 		return getFoglio(getSelezionato());
 	}
 
-	public void scrivi(Pos pos, String txt) {
-		getFoglio(getSelezionato()).scrivi(pos, txt);
+	public void scrivi(Pos pos, String txt) throws Exception {
+		getFoglioSelezionato().scrivi(pos, txt);
 	}
 
 	public void copia(Pos from, Pos to) {
-		getFoglio(getSelezionato()).copia(from, to);
+		getFoglioSelezionato().copia(from, to);
 	}
 
 	public void nuovo_foglio() {
