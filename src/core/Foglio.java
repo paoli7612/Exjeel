@@ -1,16 +1,15 @@
 package core;
 
 import App.App;
-import logging.Critical;
 import logging.Info;
 import utils.Parse;
 
 public class Foglio {
-	
+
 	private Cella[][] celle;
 	
 	public Foglio() {
-		celle = new Cella[App.RIGHE][App.COLONNE];
+		celle = new Cella[App.RIGHE][App.COLONNE];				
 	}
 	
 	public void print() {
@@ -49,54 +48,43 @@ public class Foglio {
 		
 		return str;
 	}
-	
-	public Cella getCella(int x, int y) {
-		if (celle[y][x] == null) {
-			celle[y][x] = new Cella(this);
-		}
-		return celle[y][x];
-	}
-	
-	public Cella getCella(Pos pos) {
-		return getCella(pos.getX(), pos.getY());
-	}
 
-	public void scrivi(Pos pos, String value) throws Exception {
+	public void scrivi(Pos pos, String v) {
 		try {
-			setCella(pos, new Cella(this, Parse.cfloat(value)));
-		} catch (Exception e) {
-			if (value.charAt(0) == '=')
-				setCella(pos, new Formula(this, value));
-			else 
-				setCella(pos, new Testo(this, value));
-		}
+			Float f = Parse.cfloat(v);
+			setCella(pos, new CellaNumero(f));		
+		} catch (Exception e) { // se non ci riesco
+			if (v.charAt(0) == '=') { // guardo se è una formula
+				try {	
+					setCella(pos, new CellaFormula(this, v));
+				} catch (Exception e2) {
+					setCella(pos, new CellaTesto(CellaFormula.ERR));
+				}
+			} else { // altrimenti è un testo normale
+				setCella(pos, new CellaTesto(v));
+			}
+		}		
+	}
+
+	private void setCella(int riga, int colonna, Cella cella) {
+		new Info(riga + " " + colonna);
+		this.celle[riga][colonna] = cella;
 	}
 	
-	private void setCella(Pos pos, Cella c) {
-		celle[pos.getY()][pos.getX()] = c;
+	private void setCella(Pos pos, Cella cella) {
+		setCella(pos.riga, pos.colonna, cella);
 	}
 
-	public void copia(Pos from, Pos to) {
-		setCella(to, getCella(from).clone());
+	public String leggiSopra(Pos pos){
+		return getCella(pos).leggiSopra();
 	}
-		
-	public String leggiSotto(Pos pos) {
-		Cella c = getCella(pos);
-		if (c == null)
-			return "";
-		else
-			return c.leggiSotto();
+	
+	public Float leggiValore(Pos pos) throws Exception {
+		return getCella(pos).leggiValore();
 	}
 
-	public String leggiSopra(Pos pos) {
-		Cella c = getCella(pos);
-		if (c == null)
-			return "";
-		else 
-			return c.leggiSopra();
+	private Cella getCella(Pos pos) {
+		return celle[pos.riga][pos.colonna];
 	}
 
-	public String leggiSopra(int x, int y) {
-		return leggiSopra(new Pos(x, y));
-	}		
 }

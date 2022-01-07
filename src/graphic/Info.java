@@ -10,12 +10,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import App.App;
+import App.GUIApp;
+
 
 public class Info extends JFrame {
 
-	private App app;
+	private GUIApp app;
 	
-	public Info(App app) {
+	public Info(GUIApp app) {
 
 		super("Info");
 		this.app = app;

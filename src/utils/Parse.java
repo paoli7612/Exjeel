@@ -11,12 +11,12 @@ public class Parse {
 		return str.substring(0, str.length() - 1);
 	}
 
-	public static Character cc(int i) {
-		return (char) i;
+	public static Character cchar(Integer i) {
+		return Character.forDigit(i, 16);
 
 	}
 
-	public static String maxStr(String text, int i) {
+	public static String maxStr(String text, Integer i) {
 		String r = text;
 		while (r.length() < i) {
 			r = " " + r;
@@ -26,42 +26,43 @@ public class Parse {
 		return r;
 	}
 
-	public static String str(int i) {
-		return "%d".formatted(i);
-	}
-	
-	public static String str(float f) {
-		return "%.2f".formatted(f);
+	public static String str(Integer i) {
+		return str(i.floatValue());
 	}
 
-	public static String str(Float v, int len) {
+	public static String str(Float v) {
 		String str = "";
 		// positivo negativo
-		if (v >= 0)
-			str += " ";
-		else
-			str += "-";
+		
 
 		// cifra delle decine
-		if (v < 10 && v >= -10)
-			str += " ";
-		else
+		if (v < 10 && v >= -10) {
+			if (v >= 0)
+				str += "  ";
+			else
+				str += "-";
+		} else {			
+			if (v >= 0)
+				str += " ";
+			else
+				str += "-";
 			str += Parse.dec(v);
+		}
 
 		// cifra delle unità
 		str += Parse.uni(v);
 
 		// decimi di unità
 		if ((v % 1) * 10 != 0)
-			str += Parse.decim(v);
+			str += "," + Parse.decim(v);
 		else
-			str += " ";
+			str += "  ";
 
 		return str;
 	}
 
 	private static Integer decim(Float v) {
-		return (int) ((v % 1) * 10);
+		return (int) Math.abs((v % 1) * 10);
 	}
 
 	public static Object cint(float v) {
@@ -73,7 +74,7 @@ public class Parse {
 	}
 
 	public static Integer uni(float v) {
-		return (int) (v % 10);
+		return (int) Math.abs(v % 10);
 	}
 
 	public static Float cfloat(String str) throws Exception {

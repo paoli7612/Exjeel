@@ -7,14 +7,13 @@ public class Alfa {
 
 	public static void main(String[] args) {
 		Log.start(Log.INFO, true);
-		App app = new App(false);
+		App app = new App();
 		
-		app.scrivi("A1", 5);
-		app.scrivi("B2", 5);
-		app.scrivi("C3", -2);
-		app.scrivi("C4", 2.4f);
-		app.scrivi("C5", -14.6f);
-		app.scrivi("C1", 14.6f);
+		app.scrivi("A1", "5");
+		app.scrivi("B1", "-2");
+		app.scrivi("C1", "2.4");
+		app.scrivi("D1", "-14.6");
+		app.scrivi("E1", "14.6");
 				
 		app.print();		
 	}

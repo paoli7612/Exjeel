@@ -5,15 +5,20 @@ public class Pos {
 	private Integer x;
 	private Integer y;
 	
+	public int riga, colonna;
+	
+	public Pos(String string) {
+		this(string.charAt(0)-64-1, Integer.parseInt(string.charAt(1)+"")-1);
+	}
+	
 	public Pos(Integer x, Integer y) {
 		this.x = x;
 		this.y = y;
+		
+		this.riga = y;
+		this.colonna = x;
 	} 
 	
-	public Pos(String string) {
-		this.x = string.charAt(0)-64-1;
-		this.y = Integer.parseInt(string.charAt(1)+"")-1;
-	}
 
 	public static Pos riga_colonna(Integer riga, Integer colonna) {
 		return new Pos(colonna, riga);

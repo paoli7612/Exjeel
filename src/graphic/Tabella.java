@@ -5,6 +5,7 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import App.App;
+import App.GUIApp;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,11 +14,11 @@ import core.Pos;
 import logging.Info;
 import java.awt.event.MouseEvent;
 
-public class Table extends JTable {
+public class Tabella extends JTable {
 
-    private App app;
+    private GUIApp app;
 
-    public Table(App app) {
+    public Tabella(GUIApp app) {
 
         super(app.COLONNE+1, app.RIGHE+1);
         this.app = app;
@@ -106,7 +107,7 @@ public class Table extends JTable {
         if (p.intestazione()) {
             app.finestra.clearTf();
         } else {
-            app.finestra.tf.setText(app.leggiSotto(p));
+            //app.finestra.tf.setText(app.leggiSotto(p));
         }
 
 		app.finestra.tf.grabFocus();	

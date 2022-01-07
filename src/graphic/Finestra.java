@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 import App.App;
+import App.GUIApp;
 import core.Foglio;
 import core.Pos;
 import logging.Error;
@@ -19,9 +20,9 @@ import logging.Warn;
 
 import java.awt.event.*;
 
-public final class Window extends JFrame  {
+public final class Finestra extends JFrame  {
 	
-	public static App app;
+	public GUIApp app;
 	
 	private JPanel header;
 	
@@ -30,7 +31,7 @@ public final class Window extends JFrame  {
 	public JTabbedPane tabbed;
 	public JTextField tf;
 		
-	public Window(App app) {
+	public Finestra(GUIApp app) {
 		super("Exjeel");
 		this.app = app;
 		
@@ -60,7 +61,7 @@ public final class Window extends JFrame  {
 		tf.addActionListener(new AbstractAction() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-	    		app.finestra.enter();
+	    		//app.finestra.enter();
 		    }
 		});
 		
@@ -70,13 +71,13 @@ public final class Window extends JFrame  {
 		// button.nuovo
 		newButton("new-sheet", "Nuovo foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				app.nuovo_foglio();
+				app.nuovoFoglio();
 			} 
 		});
 		// button.elimina
 		newButton("del-sheet", "Elimina foglio").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				app.elimina_foglio(app.finestra.tabbed.getSelectedIndex());
+				//app.elimina_foglio(app.finestra.tabbed.getSelectedIndex());
 			} 
 		});
 		// button.apri
@@ -85,7 +86,7 @@ public final class Window extends JFrame  {
 				JFileChooser choser = new JFileChooser();
 				choser.showOpenDialog(null);
 				try {
-					app.carica(choser.getSelectedFile().getPath());					
+					//app.carica(choser.getSelectedFile().getPath());					
 				} catch (Exception e2) {
 					new Error("Non ho caricato un file perchè non è stato selezionato");
 				}
@@ -94,7 +95,7 @@ public final class Window extends JFrame  {
 		// button.salva
 		newButton("save", "Salva").addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				app.salva();
+				//app.salva();
 			} 
 		});
 		// button.chiudi
@@ -127,8 +128,8 @@ public final class Window extends JFrame  {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				try {
-					app.file.setSelezionato(app.finestra.tabbed.getSelectedIndex());
-					app.finestra.selezionaCella();
+					//app.file.setSelezionato(app.finestra.tabbed.getSelectedIndex());
+					//app.finestra.selezionaCella();
 				} catch (Exception e2) {}
 			}
 		});
@@ -141,13 +142,13 @@ public final class Window extends JFrame  {
 		super.setVisible(true);
 		
 		
-		if (app.file != null) {		
+		/*if (app.file != null) {		
 			// carica il file della applicazione
-			for (int i=0; i<app.file.nFogli(); i++) {
+			for (int i=0; i<app.file.countFogli(); i++) {
 				Foglio f = app.file.getFoglio(i);
 				aggiungi_foglio(f);
 			}		
-		}
+		}*/	
 	}
 	
 	public void resize() {
@@ -157,22 +158,22 @@ public final class Window extends JFrame  {
 		scrollPane.setPreferredSize(dd);
 	}
 	
-	public void aggiungi_foglio(Table table) {
+	public void aggiungi_foglio(Tabella table) {
 		new Info("Nuovo foglio");
-		tabbed.addTab(app.file.prossimo_nome(), table);	
+		//tabbed.addTab(app.file.prossimo_nome(), table);	
 	}
 	
 	public void aggiungi_foglio() {
-		aggiungi_foglio(new Table(app));
+		aggiungi_foglio(new Tabella(app));
 	}
 
 	public void aggiungi_foglio(Foglio foglio) {
-		Table table = new Table(app);
+		Tabella table = new Tabella(app);
 		for (int y=0; y<App.RIGHE; y++) {
 			for (int x=0; x<App.COLONNE; x++) {
-				if (foglio.leggiSopra(x, y) != null) {
-					table.setValueAt(foglio.leggiSopra(x, y), y+1, x+1);	
-				}
+				//if (foglio.leggiSopra(x, y) != null) {
+					//table.setValueAt(foglio.leggiSopra(x, y), y+1, x+1);	
+				//}
 			}
 		}
 		aggiungi_foglio(table);
@@ -195,31 +196,19 @@ public final class Window extends JFrame  {
 		if (JOptionPane.showConfirmDialog(null, "Sei sicuro?") == 0)
 			app.chiudi();
 	}
-
-	public void aggiorna(Pos pos, Integer index) {
-		new Info("Window.aggiorna " + pos.coord());
-		Table table = (Table)this.tabbed.getComponentAt(index);
-		table.scrivi(pos, app.leggiSopra(pos));
-	}
 	
-	public void aggiorna(Pos pos) {
-		new Info(app.file.getSelezionato() + " Selezionato");
-		aggiorna(pos, app.file.getSelezionato());
-	}
-
 	public void clearTf() {
 		this.tf.setText("");
 	}
 
 	public void selezionaCella() {
-		Table t = (Table) tabbed.getSelectedComponent();
+		Tabella t = (Tabella) tabbed.getSelectedComponent();
 		t.selezionaCella();
 	}
 
 	protected void enter() {
-		app.file.setSelezionato(tabbed.getSelectedIndex());
 		new Info(tabbed.getTitleAt(tabbed.getSelectedIndex()));
-		Table table = (Table) this.tabbed.getSelectedComponent();
+		Tabella table = (Tabella) this.tabbed.getSelectedComponent();
 		Pos p = table.getSelectedPos();
 		app.scrivi(p, tf.getText());
 	}	
