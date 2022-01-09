@@ -7,10 +7,13 @@ package logging;
  */
 public final class Error extends Log {
 
+	
+	/**
+	 * 
+	 * @param messaggio stringa di testo da mostrare come errore non critico
+	 */
 	public Error(final String messaggio) {
-		
 		super(Log.ERROR, messaggio, "[!]");
-		
 	}
 	
 }

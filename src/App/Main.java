@@ -1,6 +1,5 @@
 package App;
 
-import logging.Info;
 import logging.Log;
 
 public class Main {

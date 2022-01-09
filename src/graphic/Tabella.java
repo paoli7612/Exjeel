@@ -19,8 +19,7 @@ public class Tabella extends JTable {
     private GUIApp app;
 
     public Tabella(GUIApp app) {
-
-        super(app.COLONNE+1, app.RIGHE+1);
+    	super(app.RIGHE+1, app.COLONNE+1);
         this.app = app;
         this.setRowHeight(25);
 
@@ -81,12 +80,12 @@ public class Tabella extends JTable {
         });
     }
 
-    public void scrivi(Integer x, Integer y, String value) {
+    public void write(Integer x, Integer y, String value) {
         setValueAt(value, y, x);
     }
 
-    public void scrivi(Pos pos, String s) {
-        scrivi(pos.getX() + 1, pos.getY() + 1, s);
+    public void write(Pos pos, String s) {
+        write(pos.getX() + 1, pos.getY() + 1, s);
     }
 
     public String leggi(Pos pos) {
@@ -99,7 +98,7 @@ public class Tabella extends JTable {
     }
 
     Pos getSelectedPos() {
-        return new Pos(getSelectedColumn() - 1, getSelectedRow() - 1);
+        return Pos.riga_colonna(getSelectedRow() - 1, getSelectedColumn() - 1);
     }
 
 	public void selezionaCella() {
@@ -111,6 +110,5 @@ public class Tabella extends JTable {
         }
 
 		app.finestra.tf.grabFocus();	
-	}
-	
+	}	
 }

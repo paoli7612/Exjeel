@@ -1,8 +1,7 @@
 package App;
 
+import core.Pos;
 import graphic.Finestra;
-import logging.Info;
-import logging.Log;
 
 public class GUIApp extends App {
 
@@ -12,8 +11,23 @@ public class GUIApp extends App {
 		finestra = new Finestra(this);
 	}
 	
-	public void chiudi() {
-		new Info("CUIApp.chiudi()");
+	@Override
+	public void newFoglio() {
+		super.newFoglio();
+		finestra.newFoglio();
 	}
+	
+	@Override
+	public void quit() {
+		finestra.dispose();
+		super.quit();
+	}
+	
+	@Override
+	public void write(Pos pos, String v) {
+		super.write(pos, v);
+		finestra.write(pos, v);
+	}
+
 
 }

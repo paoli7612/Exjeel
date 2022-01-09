@@ -1,8 +1,11 @@
 package App;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 import core.File;
 import core.Pos;
-import logging.Info;
 import logging.Warn;
 
 public class App {
@@ -18,15 +21,19 @@ public class App {
 	}
 	
 	public void start() {
-		new Warn("App.start()");
+		new Warn("App.start();");
+	}
+	
+	public void quit() {
+		new Warn("App.quit();");
 	}
 		
-	public void nuovoFoglio() {
+	public void newFoglio() {
 		new Warn("Nuovo foglio");
 		file.newFoglio();
 	}
 	
-	public void rimuoviFoglio() {
+	public void remFoglio() {
 		new Warn("Rimuovi foglio");
 		file.remFoglio();
 	}
@@ -36,13 +43,30 @@ public class App {
 		file.print();
 	}
 	
-	public void scrivi(Pos pos, String v) {
-		new Warn("Scrivi a %s: %s".formatted(pos.coord(), v));
+	public void save(String filename) throws Exception {
+		new Warn("Save");
+		FileOutputStream f = new FileOutputStream(new java.io.File(filename));
+		ObjectOutputStream o = new ObjectOutputStream(f);
+		o.writeObject(file);
+		o.close();
+		file.save();
+	}
+	
+	public void save() {
+		
+	}
+	
+	public void load(String filename) {
+		new Warn("Load file %d".formatted(filename));
+	}
+	
+	public void write(Pos pos, String v) {
+		new Warn("Write a %s: %s".formatted(pos.coord(), v));
 		file.getFoglioSelezionato().scrivi(pos, v);
 	}
 	
 	public void scrivi(String pos, String v) {
-		scrivi(new Pos(pos), v);
+		write(new Pos(pos), v);
 	}
 	
 

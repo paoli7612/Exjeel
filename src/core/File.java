@@ -1,12 +1,14 @@
 package core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class File {
+public class File implements Serializable {
 
 	private List<Foglio> fogli;
 	private Integer selezionato;
+	private int tot;
 	
 	public File() {
 		fogli = new ArrayList<Foglio>();
@@ -14,7 +16,7 @@ public class File {
 		setSelezionato(0);
 	}
 	
-	private void setSelezionato(Integer selezionato) {
+	public void setSelezionato(Integer selezionato) {
 		this.selezionato = selezionato;
 	}
 	
@@ -47,6 +49,19 @@ public class File {
 
 	public void remFoglio() {
 		fogli.remove((int)getSelezionato());
+	}
+
+	public void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String nextNome() {
+		return "Foglio %d".formatted(++tot);
+	}
+
+	public Foglio getFoglio(int i) {
+		return fogli.get(i);
 	}
 
 }

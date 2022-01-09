@@ -76,9 +76,17 @@ public class Foglio {
 	}
 
 	public String leggiSopra(Pos pos){
-		return getCella(pos).leggiSopra();
+		Cella c = getCella(pos);
+		if (c == null)
+			return "";
+		else return c.leggiSopra();
+		
 	}
 	
+	public Object leggiSopra(int x, int y) {
+		return leggiSopra(new Pos(x, y));
+	}
+
 	public Float leggiValore(Pos pos) throws Exception {
 		return getCella(pos).leggiValore();
 	}
@@ -86,5 +94,6 @@ public class Foglio {
 	private Cella getCella(Pos pos) {
 		return celle[pos.riga][pos.colonna];
 	}
+
 
 }
