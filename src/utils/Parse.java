@@ -30,6 +30,10 @@ public class Parse {
 		return str(i.floatValue());
 	}
 
+	public static String str(char c) {
+		return c + "";
+	}
+	
 	public static String str(Float v) {
 		String str = "";
 		// positivo negativo
@@ -85,6 +89,11 @@ public class Parse {
 		}
 	}
 
-
-
+	public static Integer x(char a) {
+		return a-64;
+	}
+	
+	public static Integer y(char a) {
+		return Integer.parseInt(str(a));
+	}
 }

@@ -9,11 +9,11 @@ public class Alfa {
 		Log.start(Log.INFO, true);
 		App app = new App();
 		
-		app.scrivi("A1", "5");
-		app.scrivi("B1", "-2");
-		app.scrivi("C1", "2.4");
-		app.scrivi("D1", "-14.6");
-		app.scrivi("E1", "14.6");
+		app.write("A1", "5");
+		app.write("B1", "-2");
+		app.write("C1", "2.4");
+		app.write("D1", "-14.6");
+		app.write("E1", "14.6");
 				
 		app.print();		
 	}

@@ -9,6 +9,7 @@ public class File implements Serializable {
 	private List<Foglio> fogli;
 	private Integer selezionato;
 	private int tot;
+	public String fname;
 	
 	public File() {
 		fogli = new ArrayList<Foglio>();
@@ -46,6 +47,10 @@ public class File implements Serializable {
 			foglio.print();
 		}
 	}
+	
+	public void printSelezionato() {
+		getFoglioSelezionato().print();
+	}
 
 	public void remFoglio() {
 		fogli.remove((int)getSelezionato());
@@ -63,5 +68,7 @@ public class File implements Serializable {
 	public Foglio getFoglio(int i) {
 		return fogli.get(i);
 	}
+
+
 
 }

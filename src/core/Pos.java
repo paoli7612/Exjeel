@@ -1,5 +1,7 @@
 package core;
 
+import utils.Parse;
+
 public class Pos {
 
 	private Integer x;
@@ -8,7 +10,8 @@ public class Pos {
 	public int riga, colonna;
 	
 	public Pos(String string) {
-		this(string.charAt(0)-64-1, Integer.parseInt(string.charAt(1)+"")-1);
+		this(Parse.x(string.charAt(0))-1, Parse.y(string.charAt(1))-1);
+		
 	}
 	
 	public Pos(Integer x, Integer y) {
@@ -19,7 +22,6 @@ public class Pos {
 		this.colonna = x;
 	} 
 	
-
 	public static Pos riga_colonna(Integer riga, Integer colonna) {
 		return new Pos(colonna, riga);
 	}
